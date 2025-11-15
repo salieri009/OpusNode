@@ -230,9 +230,9 @@ OpusNode features a comprehensive design system built with modern principles:
 
 | Language | Documentation | Description |
 |----------|--------------|-------------|
-| 🇰🇷 | [한국어](README.ko.md) | 한국어 전체 문서 |
+| 🇰🇷 | [한국어](README.ko.md) | Full documentation in Korean |
 | 🇺🇸 | [English](README.en.md) | Full documentation in English |
-| 🇯🇵 | [日本語](README.ja.md) | 日本語完全ドキュメント |
+| 🇯🇵 | [日本語](README.ja.md) | Full documentation in Japanese |
 
 ### Additional Resources
 
@@ -286,3 +286,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Built with ❤️ for Learners**
 
 *A modular learning platform where each user becomes a node in a collaborative network of creation.*
+
