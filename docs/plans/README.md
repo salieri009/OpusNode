@@ -32,14 +32,17 @@
 3. **[Features Overview](03-features/README.md)**  
    기능 매트릭스 및 우선순위
 
-4. **[Feature Specifications](03-features/)**  
-   - [AI Interview & Assessment](03-features/ai-assessment.md) (F-001)
-   - [Group Matching Algorithm](03-features/group-matching.md) (F-002)
-   - [Learning Dashboard](03-features/learning-dashboard.md) (F-003)
-   - [Project Workspace](03-features/project-workspace.md) (F-004)
-   - [Personalized Curriculum](03-features/curriculum-generator.md) (F-005)
-   - [Portfolio Generator](03-features/portfolio-generator.md) (F-006)
-   - [Admin Dashboard](03-features/admin-dashboard.md) (F-007)
+4. **[Feature Specifications](03-features/)**
+
+| Feature ID | Feature Name | Document |
+|:-----------|:-------------|:---------|
+| **F-001** | AI Interview & Assessment | [View](03-features/F-001-AI-Assessment.md) |
+| **F-002** | Group Matching Algorithm | [View](03-features/F-002-Group-Matching.md) |
+| **F-003** | Learning Dashboard | [View](03-features/F-003-Learning-Dashboard.md) |
+| **F-004** | Project Workspace | [View](03-features/F-004-Project-Workspace.md) |
+| **F-005** | Personalized Curriculum | [View](03-features/F-005-Curriculum-Generator.md) |
+| **F-006** | Portfolio Generator | [View](03-features/F-006-Portfolio-Generator.md) |
+| **F-007** | Admin Dashboard | [View](03-features/F-007-Admin-Dashboard.md) |
 
 ### Architecture & Technical
 

@@ -1,178 +1,203 @@
-# 🎨 UX/UI Design Principles
+# UX/UI Design Principles & Page Flows
 
 **Document:** TailCamp PRD - UX/UI Design Principles  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Version:** 1.1  
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
-
-TailCamp의 사용자 경험 및 사용자 인터페이스 설계 원칙과 주요 화면 와이어프레임을 정의합니다.
-
-**관련 문서:**
-- [Features Overview](../03-features/README.md) - 기능 목록
-- [System Architecture](../04-architecture/system-architecture.md) - 시스템 아키텍처
-
----
-
-## 🎯 Design Philosophy
+## 1. Design Philosophy
 
 ### Clarity First
-복잡한 기능도 직관적으로 이해할 수 있도록 설계합니다.
+Complex functionality should be immediately understandable through intuitive design. Every interaction should have a clear purpose and predictable outcome.
 
 ### Progressive Disclosure
-필요한 정보만 단계적으로 노출하여 사용자의 인지 부담을 줄입니다.
+Present only the information needed at each step to reduce cognitive load. Advanced features are accessible but not prominent until the user needs them.
 
 ### Delightful Moments
-작은 애니메이션과 피드백으로 사용자에게 즐거움을 제공합니다.
+Micro-animations and contextual feedback create moments of delight without distracting from core tasks.
 
 ### Accessibility
-WCAG 2.1 AA 준수를 통해 모든 사용자가 접근할 수 있도록 합니다.
+WCAG 2.1 AA compliance ensures that all users, regardless of ability, can access and use TailCamp effectively.
 
 ---
 
-## 🖼️ Key Screens Wireframe References
+## 2. Detailed User Flows
 
-### Landing Page
+### Flow 1: New User Onboarding → Assessment
 
-**구성:**
-- 히어로 섹션 (제품 소개 + CTA)
-- 주요 기능 소개
-- 데모 영상
-- FAQ
+**Goal:** Guide users from sign-up to completed AI assessment in <15 minutes.
 
-**CTA:** "내 학습 설계받기" 시작 버튼
+```mermaid
+graph LR
+    A[Landing Page] --> B[Sign Up]
+    B --> C[Email Verification]
+    C --> D[Interest Selection]
+    D --> E[Goal Input]
+    E --> F[Start Assessment]
+    F --> G[AI Interview]
+    G --> H[Results Dashboard]
+```
 
----
+**Page Breakdowns:**
 
-### Onboarding
+#### D: Interest Selection (Multi-Select)
+-   **Layout:** 3x3 grid of technology cards (Backend, Frontend, AI/ML, Mobile, DevOps, etc.)
+-   **Interaction:** Click to toggle selection (checkmark animation), minimum 1, maximum 3 selections
+-   **CTA:** "Continue to Goals" button (disabled until 1+ selected)
 
-**단계:**
-1. 관심 분야 선택 (멀티 선택)
-2. 학습 목표 입력 (자유 텍스트)
-3. 수준 진단 시작 버튼
+#### E: Goal Input (Free Text)
+-   **Prompt:** "What do you want to achieve in the next 3 months?"
+-   **Input:** Text area (150 characters minimum), suggestions appear based on selections
+-   **Examples shown:** "Build a full-stack e-commerce app", "Contribute to open source"
 
----
-
-### AI Interview
-
-**레이아웃:**
-- **좌측**: 채팅 인터페이스
-  - 질문 표시
-  - 답변 입력 필드
-  - 이전 대화 히스토리
-- **우측**: 실시간 분석 패널
-  - 히트맵 시각화
-  - 프로그레스 바
-  - 현재 수준 추정
-
----
-
-### Group Matching
-
-**화면:**
-1. **매칭 대기 화면**
-   - 애니메이션: "AI가 당신에게 맞는 팀원을 찾고 있어요..."
-   - 예상 대기 시간 표시
-   - 대기열 순서 (선택적)
-
-2. **매칭 성공 화면**
-   - 축하 애니메이션
-   - 그룹 구성원 프로필 카드
-   - 매칭 기준 투명성 (일치도 %)
-   - "상호학습 다짐 카드"
-
-3. **그룹 프로필 페이지**
-   - 그룹 정보
-   - 구성원 목록
-   - 공통 목표
+#### F: Start Assessment
+-   **Explainer:** "I'll ask you 5-7 questions to understand your current skills. It takes about 10 minutes."
+-   **Privacy Note:** "Conversations are encrypted and used only for your personalized curriculum."
+-   **CTA:** "Begin Interview"
 
 ---
 
-### Learning Dashboard
+### Flow 2: Assessment → Matching → Group Formation
 
-**레이아웃:**
-- **상단**: 진행률 바
-  - 전체 진행률
-  - 분야별 진행률
-- **중앙**: 주간 로드맵
-  - 주차별 학습 계획
-  - Prerequisite 관계 시각화
-- **우측**: AI 어시스턴트 위젯
-  - "오늘의 미션"
-  - 빠른 질문
-- **하단**: 그룹 프로젝트 카드
-  - 진행 중인 프로젝트
-  - 그룹원 진행 상황
+**Goal:** Show transparency in matching, build trust in the algorithm.
+
+```mermaid
+graph LR
+    A[Assessment Complete] --> B[View Results]
+    B --> C{Join Matching?}
+    C -->|Yes| D[Waiting Screen]
+    C -->|No| E[Solo Mode Dashboard]
+    D --> F[Match Found!]
+    F --> G[Group Profile]
+    G --> H[First Meeting Setup]
+```
+
+**Page Breakdowns:**
+
+#### B: View Assessment Results
+-   **Visualization:** Radar chart showing skill scores (Backend: 0.7, Frontend: 0.3, etc.)
+-   **Insights:** "You're strongest in backend development. Recommended focus: API design, databases."
+-   **CTA Options:** "Find My Team" (primary), "Explore Solo" (secondary)
+
+#### D: Matching Waiting Screen
+-   **Animation:** Pulsing circles representing users in queue, AI "thinking" indicator
+-   **Status Updates:** "Analyzing 47 potential teammates...", "Found 3 promising matches..."
+-   **Estimated Time:** Dynamic countdown (e.g., "Usually takes 2-6 hours")
+-   **Option:** "Leave Queue" button (confirmation modal to prevent accidental exits)
+
+#### F: Match Found Celebration
+-   **Confetti Animation:** Brief celebratory animation (2 seconds)
+-   **Preview:** Profile cards of 3-4 matched teammates (name, avatar, top skills)
+-   **Match Score:** "92% compatibility" with brief explanation ("Complementary skills, shared goal: Build a REST API")
+
+#### G: Group Profile Page
+-   **Sections:**
+    -   Group Name (e.g., "Backend Builders - Cohort 42")
+    -   Member cards (click to view full profile)
+    -   Shared Learning Goal
+    -   Suggested First Meeting agenda
+-   **CTA:** "Schedule First Meeting" (integrates with calendar)
 
 ---
 
-### Project Workspace
+### Flow 3: Group → Project → Portfolio
 
-**레이아웃:**
-- **좌측**: 프로젝트 정보 및 네비게이션
-  - 프로젝트 개요
-  - 기술 스택
-  - 진행 상태
-- **중앙**: 메인 작업 영역
-  - 태스크 관리 (드래그 앤 드롭)
-  - 파일 공유
-  - GitHub 연동
-- **우측**: AI 코치 및 채팅
-  - AI 코치 챗봇
-  - 그룹 채팅
+**Goal:** Seamlessly transition from team formation to deliverable output.
+
+```mermaid
+graph LR
+    A[Group Dashboard] --> B[Propose Project]
+    B --> C[Vote on Idea]
+    C --> D[Project Workspace]
+    D --> E[Track Progress]
+    E --> F[Mark Complete]
+    F --> G[Generate Portfolio]
+```
+
+**Page Breakdowns:**
+
+#### D: Project Workspace (Central Hub)
+-   **Left Sidebar:**
+    -   Project Overview
+    -   Tech Stack badges
+    -   GitHub repo link
+    -   Progress bar (0-100%)
+-   **Center Canvas:**
+    -   Kanban Board (To Do, In Progress, Review, Done)
+    -   Drag-and-drop task cards
+    -   Assignee avatars, due dates, priority labels
+-   **Right Sidebar:**
+    -   AI Coach widget ("Need help with authentication?" suggestions)
+    -   Team chat (real-time, typing indicators)
+    -   File sharing panel
+
+#### G: Portfolio Generator
+-   **Auto-populated Fields:**
+    -   Project name, description
+    -   Tech stack
+    -   Your role & contributions (from GitHub commits)
+    -   Screenshots (uploaded by team)
+-   **Customization:** Edit sections, choose template (Minimal, Professional, Creative)
+-   **Output:** Live preview, 1-click export to PDF or hosted web page
 
 ---
 
-## 🎨 Design System
+## 3. Design System
 
 ### Color Palette
-- **Primary Blue** (`#0a95ff`): Trust, technology
-- **Secondary Green** (`#22c55e`): Success, energy
-- **Accent Orange** (`#f97316`): Attention, CTAs
+
+| Color | Hex | Usage |
+|:------|:----|:------|
+| Primary Blue | `#0a95ff` | CTAs, links, primary actions |
+| Secondary Green | `#22c55e` | Success states, completion indicators |
+| Accent Orange | `#f97316` | Alerts, important notifications |
+| Neutral Gray | `#6b7280` | Body text |
+| Background | `#f9fafb` | Page background (light mode) |
 
 ### Typography
-- **Heading**: Inter, Bold
-- **Body**: Inter, Regular
-- **Code**: JetBrains Mono
 
-### Components
-- Button styles (Primary, Secondary, Ghost)
-- Input fields (Text, Textarea, Select)
-- Cards (Project, Group, User)
-- Modals and Dialogs
+-   **Headings:** Inter, 600 weight
+-   **Body:** Inter, 400 weight
+-   **Code:** JetBrains Mono, 400 weight
+-   **Sizes:** 12px (caption), 14px (body), 16px (default), 20px (h3), 24px (h2), 32px (h1)
+
+### Component Library
+
+-   **Buttons:** Primary (filled), Secondary (outlined), Ghost (text-only)
+-   **Input Fields:** Text, Textarea, Select (dropdown), Multi-select (tags)
+-   **Cards:** Flat (no shadow), Elevated (subtle shadow), Interactive (hover lift)
+-   **Modals:** Centered overlay with backdrop blur
 
 ---
 
-## ♿ Accessibility
+## 4. Responsive Breakpoints
+
+| Device | Width | Layout Adjustments |
+|:-------|:------|:-------------------|
+| Mobile | < 768px | Single column, bottom nav, collapsible sidebar |
+| Tablet | 768px - 1024px | Two-column where applicable, side nav |
+| Desktop | > 1024px | Three-column layouts, persistent sidebar |
+
+**Mobile-First Approach:** All designs start with mobile constraints, then progressively enhance for larger screens.
+
+---
+
+## 5. Accessibility Standards
 
 ### WCAG 2.1 AA Compliance
-- **Color Contrast**: 4.5:1 이상
-- **Keyboard Navigation**: 모든 기능 키보드 접근 가능
-- **Screen Reader**: ARIA 레이블 및 역할 정의
-- **Focus Indicators**: 명확한 포커스 표시
+
+-   **Color Contrast:** 4.5:1 for normal text, 3:1 for large text
+-   **Keyboard Navigation:** All interactive elements reachable via Tab, Enter, Esc keys
+-   **Screen Reader Support:** Semantic HTML, ARIA labels for dynamic content
+-   **Focus Indicators:** Visible 2px outline on all focusable elements
+
+### Testing Tools
+
+-   **axe DevTools:** Automated accessibility scanning
+-   **NVDA/JAWS:** Manual screen reader testing
+-   **Lighthouse:** Accessibility score >95
 
 ---
 
-## 📱 Responsive Design
-
-### Breakpoints
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-
-### Mobile-First Approach
-모든 디자인은 모바일을 우선으로 설계하고, 데스크톱으로 확장합니다.
-
----
-
-## 🔗 관련 문서
-
-- [Features Overview](../03-features/README.md) - 기능 목록
-- [System Architecture](../04-architecture/system-architecture.md) - 시스템 아키텍처
-
----
-
-**다음 단계:** [Security & Privacy](../09-security/security-privacy.md) 확인
-
+**Next Step:** Review [Security & Privacy](../09-security/security-privacy.md).
