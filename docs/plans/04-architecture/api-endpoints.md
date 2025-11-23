@@ -1,25 +1,25 @@
-# 🔌 API Endpoints
+# API Endpoints
 
 **Document:** TailCamp PRD - API Endpoints  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Version:** 1.2  
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
+## 1. Overview
 
-TailCamp의 REST API 및 GraphQL 엔드포인트 명세입니다.
+This document specifies the REST API and GraphQL endpoints for the TailCamp platform. It serves as the contract between the Frontend and Backend teams.
 
-**관련 문서:**
-- [System Architecture](system-architecture.md) - 시스템 아키텍처
-- [Database Schema](database-schema.md) - 데이터베이스 스키마
+**Related Documents:**
+- [System Architecture](system-architecture.md)
+- [Database Schema](database-schema.md)
 
 ---
 
-## 🔐 Authentication
+## 2. Authentication
 
 ### POST /api/auth/register
-회원가입
+Registers a new user.
 
 **Request:**
 ```json
@@ -42,10 +42,8 @@ TailCamp의 REST API 및 GraphQL 엔드포인트 명세입니다.
 }
 ```
 
----
-
 ### POST /api/auth/login
-로그인
+Authenticates a user.
 
 **Request:**
 ```json
@@ -67,10 +65,8 @@ TailCamp의 REST API 및 GraphQL 엔드포인트 명세입니다.
 }
 ```
 
----
-
 ### POST /api/auth/refresh
-토큰 갱신
+Refreshes an expired access token.
 
 **Headers:**
 ```
@@ -86,10 +82,10 @@ Authorization: Bearer <refresh_token>
 
 ---
 
-## 🧠 Assessment
+## 3. Assessment [F-001]
 
 ### POST /api/assessment/start
-인터뷰 시작
+Initiates a new assessment session.
 
 **Headers:**
 ```
@@ -108,10 +104,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
 ### POST /api/assessment/answer
-답변 제출
+Submits an answer to a question.
 
 **Request:**
 ```json
@@ -134,10 +128,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
 ### GET /api/assessment/result/:id
-결과 조회
+Retrieves the results of a completed assessment.
 
 **Response:**
 ```json
@@ -155,10 +147,10 @@ Authorization: Bearer <token>
 
 ---
 
-## 👥 Matching
+## 4. Matching [F-002]
 
 ### POST /api/matching/join-queue
-매칭 대기열 참가
+Adds the user to the matching queue.
 
 **Request:**
 ```json
@@ -176,10 +168,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
 ### GET /api/matching/status
-매칭 상태 조회
+Checks the current status of the user in the queue.
 
 **Response:**
 ```json
@@ -191,15 +181,13 @@ Authorization: Bearer <token>
 ```
 
 **Status Values:**
-- `waiting`: 대기 중
-- `matching`: 매칭 중
-- `matched`: 매칭 완료
-- `failed`: 매칭 실패
-
----
+- `waiting`: In queue.
+- `matching`: Algorithm processing.
+- `matched`: Group formed.
+- `failed`: Timeout or error.
 
 ### POST /api/matching/leave-queue
-대기열 이탈
+Removes the user from the matching queue.
 
 **Response:**
 ```json
@@ -210,10 +198,10 @@ Authorization: Bearer <token>
 
 ---
 
-## 👥 Groups
+## 5. Groups & Projects [F-004]
 
 ### GET /api/groups/:id
-그룹 정보 조회
+Retrieves group details.
 
 **Response:**
 ```json
@@ -231,43 +219,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
-### GET /api/groups/:id/members
-그룹원 조회
-
-**Response:**
-```json
-{
-  "members": [
-    {
-      "id": "uuid",
-      "name": "John Doe",
-      "role": "leader",
-      "joined_at": "2024-12-19T00:00:00Z"
-    }
-  ]
-}
-```
-
----
-
-### POST /api/groups/:id/leave
-그룹 이탈
-
-**Response:**
-```json
-{
-  "message": "Successfully left group"
-}
-```
-
----
-
-## 🛠️ Projects
-
 ### POST /api/projects
-프로젝트 생성
+Creates a new project for a group.
 
 **Request:**
 ```json
@@ -288,40 +241,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
-### GET /api/projects/:id
-프로젝트 조회
-
-**Response:**
-```json
-{
-  "id": "uuid",
-  "name": "E-commerce API",
-  "description": "...",
-  "tech_stack": ["Node.js", "PostgreSQL"],
-  "status": "in_progress",
-  "tasks": [...]
-}
-```
-
----
-
-### PUT /api/projects/:id
-프로젝트 수정
-
-**Request:**
-```json
-{
-  "name": "Updated Name",
-  "status": "in_progress"
-}
-```
-
----
-
 ### POST /api/projects/:id/tasks
-태스크 추가
+Adds a task to the project board.
 
 **Request:**
 ```json
@@ -335,10 +256,10 @@ Authorization: Bearer <token>
 
 ---
 
-## 📚 Curriculum
+## 6. Curriculum [F-005]
 
 ### GET /api/curriculum/:userId
-커리큘럼 조회
+Retrieves the personalized curriculum.
 
 **Response:**
 ```json
@@ -356,10 +277,8 @@ Authorization: Bearer <token>
 }
 ```
 
----
-
 ### PUT /api/curriculum/:userId/progress
-진행률 업데이트
+Updates the progress of a curriculum item.
 
 **Request:**
 ```json
@@ -371,10 +290,10 @@ Authorization: Bearer <token>
 
 ---
 
-## 🎨 Portfolio
+## 7. Portfolio [F-006]
 
 ### POST /api/portfolio/generate
-포트폴리오 생성
+Triggers portfolio generation.
 
 **Request:**
 ```json
@@ -384,34 +303,8 @@ Authorization: Bearer <token>
 }
 ```
 
-**Response:**
-```json
-{
-  "id": "uuid",
-  "status": "generating",
-  "estimated_time": "2 minutes"
-}
-```
-
----
-
-### GET /api/portfolio/:id
-포트폴리오 조회
-
-**Response:**
-```json
-{
-  "id": "uuid",
-  "template": "minimal",
-  "content": {...},
-  "public_url": "https://..."
-}
-```
-
----
-
 ### POST /api/portfolio/:id/export
-PDF/웹 내보내기
+Exports the portfolio to a specific format.
 
 **Request:**
 ```json
@@ -420,17 +313,9 @@ PDF/웹 내보내기
 }
 ```
 
-**Response:**
-```json
-{
-  "download_url": "https://...",
-  "expires_at": "2024-12-20T00:00:00Z"
-}
-```
-
 ---
 
-## 🔒 Error Handling
+## 8. Error Handling
 
 ### Error Response Format
 ```json
@@ -452,7 +337,7 @@ PDF/웹 내보내기
 
 ---
 
-## 📊 Rate Limiting
+## 9. Rate Limiting
 
 - **Authentication**: 5 requests/minute
 - **Assessment**: 10 requests/minute
@@ -461,13 +346,5 @@ PDF/웹 내보내기
 
 ---
 
-## 🔗 관련 문서
-
-- [System Architecture](system-architecture.md) - 시스템 아키텍처
-- [Database Schema](database-schema.md) - 데이터베이스 스키마
-- [Security & Privacy](../09-security/security-privacy.md) - 보안 및 개인정보 보호
-
----
-
-**다음 단계:** [Success Metrics & KPIs](../05-metrics/success-metrics.md) 또는 다른 섹션 확인
+**Next Step:** Review [Success Metrics & KPIs](../05-metrics/success-metrics.md).
 

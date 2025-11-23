@@ -1,216 +1,148 @@
-# 🏗️ System Architecture
+# System Architecture
 
 **Document:** TailCamp PRD - System Architecture  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Version:** 1.2  
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
+## 1. Overview
 
-TailCamp의 전체 시스템 아키텍처와 각 레이어의 역할을 설명합니다.
+This document outlines the high-level system architecture of TailCamp, detailing the responsibilities of each layer and their interactions. The architecture is designed to be scalable, modular, and resilient, supporting real-time collaboration and AI-driven features.
 
-**관련 문서:**
-- [Technology Stack](technology-stack.md) - 기술 스택 상세
-- [Database Schema](database-schema.md) - 데이터베이스 스키마
-- [API Endpoints](api-endpoints.md) - API 엔드포인트
+**Related Documents:**
+- [Technology Stack](technology-stack.md)
+- [Database Schema](database-schema.md)
+- [API Endpoints](api-endpoints.md)
 
 ---
 
-## 🏗️ High-Level Architecture
+## 2. High-Level Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        Frontend Layer                         │
-│  Next.js + TypeScript + Recoil/Zustand + WebSocket Client   │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-┌──────────────────────┴──────────────────────────────────────┐
-│                      API Gateway Layer                       │
-│              NestJS + GraphQL + REST API                     │
-└──────┬───────────────┬───────────────┬──────────────────────┘
-       │               │               │
-┌──────┴──────┐ ┌──────┴──────┐ ┌──────┴──────┐
-│   Core      │ │   AI        │ │  Matching   │
-│   Service   │ │   Engine    │ │  Service    │
-└──────┬──────┘ └──────┬──────┘ └──────┬──────┘
-       │               │               │
-┌──────┴───────────────┴───────────────┴──────┐
-│            Data & Storage Layer              │
-│  PostgreSQL │ Redis │ Vector DB │ S3 │ GitHub│
-└──────────────────────────────────────────────┘
+```mermaid
+graph TD
+    Client[Frontend Layer\nNext.js + Recoil] -->|REST/GraphQL| Gateway[API Gateway Layer\nNestJS]
+    Client -->|WebSocket| Gateway
+    
+    Gateway --> Core[Core Service Layer]
+    Gateway --> AI[AI Engine Layer]
+    Gateway --> Match[Matching Service Layer]
+    
+    Core --> DB[(PostgreSQL)]
+    Core --> Cache[(Redis)]
+    Core --> S3[AWS S3]
+    
+    AI --> VectorDB[(Vector DB)]
+    AI --> LLM[External LLM API]
+    
+    Match --> RedisQueue[(Redis Queue)]
+    Match --> DB
 ```
 
----
+## 3. Architecture Layers
 
-## 📦 Architecture Layers
+### 3.1 Frontend Layer
+**Responsibility:**
+-   Delivers the user interface and experience.
+-   Manages client-side state and routing.
+-   Handles real-time updates via WebSocket.
 
-### 1. Frontend Layer
+**Key Components:**
+-   **Next.js App Router:** Server-side rendering and routing.
+-   **Recoil/Zustand:** Global state management.
+-   **WebSocket Client:** Real-time communication for chat and notifications.
 
-**역할:**
-- 사용자 인터페이스 제공
-- 실시간 업데이트 수신
-- 상태 관리 및 라우팅
+### 3.2 API Gateway Layer
+**Responsibility:**
+-   Acts as the single entry point for all client requests.
+-   Handles authentication, rate limiting, and request routing.
+-   Aggregates responses from underlying services.
 
-**주요 컴포넌트:**
-- Next.js App Router
-- React Components
-- State Management (Recoil/Zustand)
-- WebSocket Client
+**Key Components:**
+-   **NestJS:** Server-side framework.
+-   **GraphQL (Apollo):** Flexible data fetching.
+-   **Passport.js:** Authentication middleware.
 
-**상세:** [Technology Stack](technology-stack.md) 참조
+### 3.3 Core Service Layer
+**Responsibility:**
+-   Executes primary business logic.
+-   Manages user data, groups, projects, and curriculums.
+-   Ensures data integrity and validation.
 
----
+**Key Services:**
+-   **User Service:** Profile and auth management.
+-   **Group Service:** Team management and coordination.
+-   **Project Service:** Task and workspace logic.
+-   **Curriculum Service:** Learning path management.
 
-### 2. API Gateway Layer
+### 3.4 AI Engine Layer
+**Responsibility:**
+-   Orchestrates AI workflows for assessment and content generation.
+-   Manages context and prompt engineering.
+-   Interfaces with external LLM providers.
 
-**역할:**
-- 요청 라우팅 및 인증
-- GraphQL 및 REST API 제공
-- Rate Limiting 및 보안
+**Key Components:**
+-   **LangChain:** LLM orchestration framework.
+-   **Vector Store:** Semantic search for curriculum content.
+-   **LLM API:** OpenAI GPT-4 / Claude 3.5.
 
-**주요 컴포넌트:**
-- NestJS Framework
-- GraphQL (Apollo)
-- REST API
-- Authentication Middleware
+### 3.5 Matching Service Layer
+**Responsibility:**
+-   Processes the user queue to form optimal groups.
+-   Calculates compatibility scores (Cosine Similarity).
+-   Manages real-time notifications for match events.
 
----
+**Key Components:**
+-   **Python FastAPI:** High-performance calculation service.
+-   **Scikit-learn:** Similarity algorithms.
+-   **Redis:** In-memory queue management.
 
-### 3. Core Service Layer
+### 3.6 Data & Storage Layer
+**Responsibility:**
+-   Persists application data and assets.
+-   Provides caching for performance.
 
-**역할:**
-- 비즈니스 로직 처리
-- 데이터 검증 및 변환
-- 외부 서비스 연동
+**Key Components:**
+-   **PostgreSQL:** Primary relational database.
+-   **Redis:** Caching and Pub/Sub.
+-   **Milvus/Pinecone:** Vector database for AI embeddings.
+-   **AWS S3:** Object storage for user uploads and portfolios.
 
-**주요 서비스:**
-- User Service
-- Group Service
-- Project Service
-- Curriculum Service
-
----
-
-### 4. AI Engine Layer
-
-**역할:**
-- AI 모델 오케스트레이션
-- 자연어 처리
-- 벡터 검색 및 추천
-
-**주요 컴포넌트:**
-- LangChain / LangGraph
-- LLM (GPT-4 / Claude 3.5)
-- Embedding Model
-- Intent Classifier
-
----
-
-### 5. Matching Service Layer
-
-**역할:**
-- 그룹 매칭 알고리즘 실행
-- 대기열 관리
-- 실시간 매칭 알림
-
-**주요 컴포넌트:**
-- Python FastAPI Service
-- Matching Algorithm
-- Redis Queue
-- WebSocket Server
-
----
-
-### 6. Data & Storage Layer
-
-**역할:**
-- 데이터 영구 저장
-- 캐싱 및 세션 관리
-- 파일 저장
-
-**주요 컴포넌트:**
-- PostgreSQL (Primary DB)
-- Redis (Cache & Queue)
-- Vector DB (Milvus/Pinecone)
-- AWS S3 (File Storage)
-- GitHub (Code Storage)
-
-**상세:** [Database Schema](database-schema.md) 참조
-
----
-
-## 🔄 Data Flow
+## 4. Data Flow Examples
 
 ### Assessment Flow
-```
-User Input → Frontend → API Gateway → AI Engine → LLM API
-                ↓
-         PostgreSQL (Results)
-                ↓
-         Redis (Session Cache)
-```
+1.  **User Input:** User submits an answer via Frontend.
+2.  **Gateway:** Authenticates request and forwards to AI Engine.
+3.  **AI Engine:** Analyzes answer using LLM, updates context in Vector DB.
+4.  **Response:** Returns next question or final result to Frontend.
 
 ### Matching Flow
-```
-User Join Queue → Matching Service → Algorithm → Redis Queue
-                                            ↓
-                                    WebSocket Notification
-                                            ↓
-                                    Group Formation
-```
+1.  **Join Queue:** User requests matching; added to Redis Queue via Matching Service.
+2.  **Processing:** Cron job triggers matching algorithm (Python).
+3.  **Formation:** Algorithm identifies optimal group; updates PostgreSQL.
+4.  **Notification:** Matching Service publishes event to Redis Pub/Sub; Gateway pushes to Client via WebSocket.
 
-### Project Collaboration Flow
-```
-User Action → Frontend → API Gateway → Core Service
-                                    ↓
-                            WebSocket Broadcast
-                                    ↓
-                            All Group Members
-```
-
----
-
-## 🔐 Security Architecture
+## 5. Security Architecture
 
 ### Authentication & Authorization
-- JWT Token 기반 인증
-- Role-Based Access Control (RBAC)
-- API Rate Limiting
+-   **JWT:** Stateless authentication tokens.
+-   **RBAC:** Role-based access control (User, Admin, Moderator).
+-   **MFA:** Multi-factor authentication for sensitive accounts (optional).
 
 ### Data Security
-- HTTPS 강제
-- 데이터 암호화 (민감 정보)
-- SQL Injection 방지 (ORM 사용)
-- XSS 방지 (React 기본 보호)
+-   **Encryption:** TLS 1.3 for data in transit; AES-256 for sensitive data at rest.
+-   **Sanitization:** Input validation to prevent SQL Injection and XSS.
 
-**상세:** [Security & Privacy](../09-security/security-privacy.md) 참조
+*Refer to [Security & Privacy](../09-security/security-privacy.md) for details.*
 
----
+## 6. Scalability Strategy
 
-## 📊 Scalability Considerations
-
-### Horizontal Scaling
-- Stateless API 서버 (로드 밸런싱 가능)
-- Redis Cluster (캐시 분산)
-- PostgreSQL Read Replicas
-
-### Performance Optimization
-- CDN 활용 (정적 자산)
-- Database Indexing
-- Query Optimization
-- Caching Strategy
+-   **Stateless Services:** API and Core services can be horizontally scaled behind a load balancer.
+-   **Read Replicas:** PostgreSQL read replicas for heavy read operations.
+-   **Caching:** Aggressive caching of static content and curriculum data in Redis.
+-   **Async Processing:** Heavy tasks (e.g., Portfolio generation) offloaded to background workers.
 
 ---
 
-## 🔗 관련 문서
-
-- [Technology Stack](technology-stack.md) - 기술 스택 상세
-- [Database Schema](database-schema.md) - 데이터베이스 스키마
-- [API Endpoints](api-endpoints.md) - API 엔드포인트
-- [Security & Privacy](../09-security/security-privacy.md) - 보안 및 개인정보 보호
-
----
-
-**다음 단계:** [Technology Stack](technology-stack.md) 또는 [Database Schema](database-schema.md) 확인
+**Next Step:** Review [Technology Stack](technology-stack.md).
 

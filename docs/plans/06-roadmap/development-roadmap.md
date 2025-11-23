@@ -1,130 +1,93 @@
-# 🗓️ Development Roadmap
+# Development Roadmap
 
 **Document:** TailCamp PRD - Development Roadmap  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Version:** 1.1  
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
+## 1. Overview
 
-TailCamp의 단계별 개발 계획과 마일스톤을 정의합니다.
+This document outlines the strategic product roadmap for TailCamp. It is structured to prioritize high-impact features that validate our core value proposition (Assessment & Matching) before scaling to complex collaboration tools.
 
-**관련 문서:**
-- [Features Overview](../03-features/README.md) - 기능 목록
-- [Success Metrics & KPIs](../05-metrics/success-metrics.md) - 성공 지표
-
----
-
-## 🚀 Phase 1: MVP (Months 1-3)
-
-### Month 1: Foundation
-
-**목표:** 프로젝트 기반 구축 및 핵심 인프라 완성
-
-- [ ] 프로젝트 셋업 (Next.js + NestJS)
-- [ ] 인증 시스템 (JWT)
-- [ ] 기본 DB 스키마 구현
-- [ ] AI 인터뷰 시스템 (기본)
-- [ ] 사용자 대시보드 (기본)
-
-**마일스톤:** 사용자 등록 및 기본 인증 완료
+**Related Documents:**
+- [Features Overview](../03-features/README.md)
+- [Success Metrics & KPIs](../05-metrics/success-metrics.md)
 
 ---
 
-### Month 2: Core Features
+## 2. Phased Rollout Strategy
 
-**목표:** 핵심 기능 구현 완료
+### Phase 1: Foundation & Validation (Months 1-3)
+**Objective:** Validate the "Assessment -> Match -> Group" loop. Ensure users can be accurately assessed and placed into viable learning groups.
 
-- [ ] AI 인터뷰 완성 (실시간 분석)
-- [ ] 매칭 알고리즘 구현
-- [ ] 그룹 생성 및 관리
-- [ ] 학습 대시보드 (로드맵 표시)
+| Timeline | Feature Focus | Key Deliverables |
+|:---------|:--------------|:-----------------|
+| **Month 1** | **Infrastructure & Auth** | - Next.js/NestJS Boilerplate<br>- User Authentication (JWT)<br>- Database Schema Implementation<br>- Basic CI/CD Pipeline |
+| **Month 2** | **Assessment & Matching** | - **[F-001]** AI Assessment Engine (MVP)<br>- **[F-002]** Group Matching Algorithm (v1)<br>- **[F-003]** Learning Dashboard (Read-only) |
+| **Month 3** | **Curriculum & Beta** | - **[F-005]** Curriculum Generator (MVP)<br>- Private Beta Launch (Waitlist)<br>- Feedback Loop Integration |
 
-**마일스톤:** AI 평가 및 그룹 매칭 기능 완료
+### Phase 2: Collaboration & Engagement (Months 4-6)
+**Objective:** Empower groups to build projects effectively. Move from "Matching" to "Working".
 
----
+| Timeline | Feature Focus | Key Deliverables |
+|:---------|:--------------|:-----------------|
+| **Month 4** | **Project Workspace** | - **[F-004]** Project Workspace (Task Board)<br>- Real-time Chat (Socket.io)<br>- File Sharing |
+| **Month 5** | **Integration & AI Coach** | - **[F-004]** GitHub Integration<br>- AI Coach Chatbot (Code Review)<br>- **[F-006]** Portfolio Generator (Alpha) |
+| **Month 6** | **Public Launch** | - **[F-007]** Admin Dashboard<br>- Performance Optimization<br>- Public Launch Marketing |
 
-### Month 3: Polish & Launch
+### Phase 3: Scale & Monetization (Months 7-12)
+**Objective:** Scale the user base and introduce premium features.
 
-**목표:** MVP 완성 및 베타 출시
-
-- [ ] 커리큘럼 생성기
-- [ ] 프로젝트 워크스페이스 (기본)
-- [ ] UI/UX 개선
-- [ ] 베타 테스트
-- [ ] 버그 수정 및 최적화
-
-**마일스톤:** MVP 출시 및 베타 테스트 시작
-
----
-
-## 🎨 Phase 2: Enhancement (Months 4-6)
-
-### Month 4-5: Advanced Features
-
-**목표:** 고급 기능 및 통합 완성
-
-- [ ] 프로젝트 워크스페이스 완성 (GitHub 연동)
-- [ ] AI 코치 챗봇
-- [ ] 포트폴리오 생성기
-- [ ] 게이미피케이션 요소
-
-**마일스톤:** 주요 기능 완성 및 사용자 피드백 수집
+| Timeline | Feature Focus | Key Deliverables |
+|:---------|:--------------|:-----------------|
+| **Q3** | **Ecosystem Expansion** | - Mobile App (React Native)<br>- Advanced Analytics for Admins<br>- Enterprise/University Partnerships |
+| **Q4** | **Monetization** | - Premium AI Features (Mock Interviews)<br>- Verified Certificates<br>- Recruiter Portal |
 
 ---
 
-### Month 6: Optimization
+## 3. Detailed Feature Roadmap
 
-**목표:** 성능 최적화 및 스케일링 준비
+### [F-001] AI Interview & Assessment
+-   **v1.0 (Month 2):** Text-based chat assessment, basic skill scoring.
+-   **v1.1 (Month 3):** Adaptive difficulty, detailed feedback report.
+-   **v2.0 (Month 7):** Voice interaction, coding challenges.
 
-- [ ] 관리자 대시보드
-- [ ] 분석 및 리포팅
-- [ ] 성능 최적화
-- [ ] 스케일링 준비
+### [F-002] Group Matching
+-   **v1.0 (Month 2):** Basic cosine similarity, scheduled batch matching (daily).
+-   **v1.1 (Month 4):** Real-time matching notifications, "Solo Mode" fallback.
+-   **v2.0 (Month 8):** Personality-based matching (Big 5 traits).
 
-**마일스톤:** 프로덕션 출시 준비 완료
+### [F-003] Learning Dashboard
+-   **v1.0 (Month 2):** Static roadmap view, progress tracking.
+-   **v1.1 (Month 3):** Dynamic updates based on curriculum changes.
+-   **v2.0 (Month 6):** Gamification (Streaks, Badges).
 
----
+### [F-004] Project Workspace
+-   **v1.0 (Month 4):** Kanban board, basic chat.
+-   **v1.1 (Month 5):** GitHub PR linking, automated status updates.
+-   **v2.0 (Month 9):** Integrated IDE (VS Code Web) or Sandbox.
 
-## 🌟 Phase 3: Scale (Months 7-12)
+### [F-005] Curriculum Generator
+-   **v1.0 (Month 3):** Template-based generation with minor personalization.
+-   **v1.1 (Month 5):** Full AI generation based on vector search of public content.
+-   **v2.0 (Month 10):** Integration with paid course providers (Udemy, Coursera).
 
-### 고급 AI 기능
-- 멀티모달 AI 평가
-- 고급 매칭 알고리즘
-- 개인화 강화
-
-### 플랫폼 확장
-- 모바일 앱 (선택적)
-- 커뮤니티 기능
-- 프리미엄 기능
-
-### 글로벌 확장
-- 다국어 지원 확대
-- 지역별 커스터마이징
-
----
-
-## 📊 Milestone Summary
-
-| Milestone | Target Date | Status |
-|-----------|-------------|--------|
-| Foundation Complete | Month 1 | 📋 Planned |
-| Core Features Complete | Month 2 | 📋 Planned |
-| MVP Launch | Month 3 | 📋 Planned |
-| Advanced Features | Month 5 | 📋 Planned |
-| Production Ready | Month 6 | 📋 Planned |
-| Scale Phase | Month 7+ | 📋 Planned |
+### [F-006] Portfolio Generator
+-   **v1.0 (Month 5):** Basic PDF export, one template.
+-   **v1.1 (Month 6):** Web hosting, multiple templates.
+-   **v2.0 (Month 11):** Interactive portfolios with embedded code.
 
 ---
 
-## 🔗 관련 문서
+## 4. Risk Management
 
-- [Features Overview](../03-features/README.md) - 기능 목록
-- [Success Metrics & KPIs](../05-metrics/success-metrics.md) - 성공 지표
-- [Risk Assessment](../07-risks/risk-assessment.md) - 리스크 평가
+-   **Delay Risk:** AI Engine complexity may delay Month 2 deliverables.
+    -   *Mitigation:* Start AI R&D in Month 1 parallel to Infrastructure.
+-   **Adoption Risk:** Users may drop off after matching.
+    -   *Mitigation:* Implement strong "First Meeting" guides and icebreakers in Month 3.
 
 ---
 
-**다음 단계:** [Risk Assessment](../07-risks/risk-assessment.md) 확인
+**Next Step:** Review [Risk Assessment](../07-risks/risk-assessment.md).
 

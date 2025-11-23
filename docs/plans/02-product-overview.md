@@ -1,138 +1,91 @@
 # 🎯 Product Overview
 
+# Product Overview
+
+## Version History
+
+| Version | Date       | Author       | Description                          | Status   |
+|:-------:|:----------:|:------------:|:-------------------------------------|:--------:|
+| 1.0     | 2025-11-15 | Product Team | Initial Draft                        | Archived |
+| 1.1     | 2025-11-23 | Tech Lead    | Refined Vision & Problem Statements  | Active   |
+
 **Document:** TailCamp PRD - Product Overview  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
+## Target Audience (타겟)
 
-이 문서는 TailCamp의 비전, 타겟 오디언스, 그리고 해결하고자 하는 문제를 정의합니다.
+### Core Target
+**"성장을 갈망하지만 방향성과 동료를 찾지 못해 방황하는 예비/주니어 개발자"**
 
-**관련 문서:**
-- [Executive Summary](01-executive-summary.md) - 프로젝트 개요
-- [Features Overview](03-features/README.md) - 기능 명세
+### Detailed Personas
 
----
+#### 1. The Career Switcher (30%)
+- **Profile:** 비전공자, 부트캠프 수료생, 독학 학습자
+- **Needs:** "무엇을 어떤 순서로 공부해야 할지 모르겠어요. 취업에 통하는 포트폴리오가 필요해요."
+- **Key Driver:** 체계적인 로드맵, 취업 연계형 프로젝트
 
-## 🎯 Vision Statement
+#### 2. The Skill Upgrader (40%)
+- **Profile:** 주니어 개발자, 컴퓨터공학 전공생
+- **Needs:** "이론은 알겠는데 실전 경험이 부족해요. 비슷한 수준의 열정적인 동료와 사이드 프로젝트를 하고 싶어요."
+- **Key Driver:** 실전 경험, 네트워킹, 기술 심화
 
-> "모든 학습자가 자신만의 최적 학습 경로를 찾고, 함께 성장할 팀을 만나 실전 경험을 쌓을 수 있는 플랫폼"
-
----
-
-## 👥 Target Audience
-
-### Primary Personas
-
-#### 1. Career Switcher (30%)
-- **나이**: 25-35세
-- **배경**: 비개발 직종에서 개발로 전환 희망
-- **니즈**: 
-  - 체계적인 학습 경로
-  - 포트폴리오 구축
-  - 취업 준비
-- **Pain Point**: 
-  - 무엇을 배워야 할지 모름
-  - 혼자 학습하기 어려움
-
-#### 2. Skill Upgrader (40%)
-- **나이**: 22-30세
-- **배경**: 주니어 개발자 또는 학생
-- **니즈**: 
-  - 특정 기술 스택 심화 학습
-  - 실전 프로젝트 경험
-- **Pain Point**: 
-  - 학습 자료가 너무 많아 우선순위를 정하기 어려움
-
-#### 3. Hobby Learner (20%)
-- **나이**: 18-45세
-- **배경**: 개발 취미 또는 사이드 프로젝트 관심
-- **니즈**: 
-  - 작은 프로젝트부터 시작
-  - 부담 없는 학습
-- **Pain Point**: 
-  - 완성도 높은 프로젝트 아이디어 부족
-
-#### 4. Portfolio Builder (10%)
-- **나이**: 20-28세
-- **배경**: 취업 준비생, 신입 개발자
-- **니즈**: 
-  - 포트폴리오 자동 생성
-  - 프로젝트 설명 정리
-- **Pain Point**: 
-  - 포트폴리오 작성 시간 부족
-  - 표현력 부족
+#### 3. The Hobby Learner (20%)
+- **Profile:** 직장인, 사이드 프로젝트 매니아
+- **Needs:** "부담 없이 시작할 수 있는 작은 프로젝트가 필요해요."
+- **Key Driver:** 재미, 자기계발, 새로운 기술 탐색
 
 ---
 
-## 🔍 Problem Statement
+## Problem to Solve (해결할 문제)
 
-### 현재 시장의 문제점
+### 1. 학습 로드맵의 부재 (Lack of Direction)
+- **현상:** 인터넷에는 정보가 넘쳐나지만, 정작 나에게 필요한 학습 순서와 깊이를 판단하기 어렵습니다.
+- **고통:** 불필요한 기술을 배우느라 시간을 낭비하거나, 기초가 부족한 상태로 심화 과정에 진입하여 좌절합니다.
 
-#### 1. 학습 자료의 파편화
-- **문제**: 무수한 튜토리얼, 강의, 문서가 산재
-- **영향**: 
-  - 개인의 수준과 목표에 맞는 우선순위 부재
-  - Prerequisite 관계가 불명확
-- **해결**: AI 기반 개인화된 커리큘럼 생성 → [Personalized Curriculum](03-features/curriculum-generator.md)
+### 2. 동료 매칭의 어려움 (Matching Failure)
+- **현상:** 스터디나 프로젝트를 시작하려 해도 수준과 목표가 맞는 사람을 찾기 어렵습니다. 커뮤니티 구인 글은 신뢰하기 어렵습니다.
+- **고통:** 팀원 간 실력 격차로 인한 프로젝트 중단, 무임승차(Free-riding) 문제로 인한 의욕 상실.
 
-#### 2. 혼자 학습의 한계
-- **문제**: 
-  - 동기 부여 부족
-  - 피드백 부재
-  - 협업 경험 부족
-- **해결**: AI 기반 그룹 매칭 → [Group Matching Algorithm](03-features/group-matching.md)
-
-#### 3. 포트폴리오 구축의 어려움
-- **문제**: 
-  - 프로젝트 설명 작성 시간 소요
-  - 기술 스택 정리 어려움
-  - 시각적 표현 부족
-- **해결**: 자동 포트폴리오 생성 → [Portfolio Generator](03-features/portfolio-generator.md)
-
-#### 4. 그룹 프로젝트 매칭의 비효율
-- **문제**: 
-  - 수준 차이로 인한 갈등
-  - 목표 불일치
-  - 역할 분배 어려움
-- **해결**: AI 기반 지능형 매칭 알고리즘 → [Group Matching Algorithm](03-features/group-matching.md)
+### 3. 실전 경험의 부족 (Experience Gap)
+- **현상:** 강의를 따라 하는 '클론 코딩'만으로는 실무 역량을 증명하기 어렵습니다.
+- **고통:** 채용 시장에서는 '협업 경험'과 '문제 해결 능력'을 요구하지만, 혼자서는 이를 경험하고 증명할 방법이 요원합니다.
 
 ---
 
-## 💡 Solution Overview
+## Proposed Solution (해결방안)
 
-TailCamp는 다음과 같은 방식으로 문제를 해결합니다:
+TailCamp는 **AI 기술**을 활용하여 개인의 수준을 진단하고, 최적의 **동료**와 **커리큘럼**을 연결하는 **All-in-One 성장 플랫폼**입니다.
 
-1. **AI Assessment** → 사용자 수준 정확히 파악
-2. **Smart Matching** → 최적의 협업 파트너 매칭
-3. **Personalized Curriculum** → 개인 맞춤형 학습 경로 제공
-4. **Project Workspace** → 효과적인 협업 도구 제공
-5. **Portfolio Generation** → 자동 포트폴리오 생성
+### 1. AI 기반 역량 진단 및 로드맵 (AI Assessment & Curriculum)
+- **Solution:** LLM 기반의 심층 인터뷰를 통해 사용자의 현재 실력을 다각도(Backend, Frontend, CS 등)로 분석합니다.
+- **Value:** 단순 퀴즈가 아닌, 대화형 평가를 통해 **개인화된 초정밀 학습 로드맵**을 생성하여 학습 효율을 극대화합니다.
 
-자세한 기능은 [Features Overview](03-features/README.md)를 참조하세요.
+### 2. 데이터 기반 스마트 매칭 (Smart Matching Algorithm)
+- **Solution:** 기술 스택, 가용 시간, 성향(MBTI 등), 학습 목표를 종합적으로 분석하여 최적의 팀을 구성합니다.
+- **Value:** 중도 이탈률을 최소화하고, 시너지를 낼 수 있는 **'성공 가능한 팀'**을 결성해 줍니다.
 
----
-
-## 🎯 Success Criteria
-
-### 사용자 관점
-- 사용자가 자신의 수준을 정확히 파악할 수 있음
-- 유사한 목표의 학습자와 효과적으로 협업할 수 있음
-- 체계적인 학습 경로를 따라 학습할 수 있음
-- 완성된 프로젝트를 포트폴리오로 쉽게 변환할 수 있음
-
-### 비즈니스 관점
-- 6개월 내 10,000명 활성 사용자 달성
-- 그룹 프로젝트 완료율 70% 이상
-- 사용자 만족도(NPS) 50+ 달성
-
-자세한 메트릭은 [Success Metrics & KPIs](05-metrics/success-metrics.md)를 참조하세요.
+### 3. 프로젝트 워크스페이스 & 포트폴리오 (Workspace & Portfolio)
+- **Solution:** 팀 빌딩부터 프로젝트 완료까지(기획→개발→배포) 가이드하는 전용 워크스페이스를 제공하고, 완료 후 기여도를 분석하여 포트폴리오를 자동 생성합니다.
+- **Value:** 협업의 과정 자체가 **증명 가능한 경력**이 되도록 지원합니다.
 
 ---
 
-## 🔗 관련 문서
+## Success Criteria
+
+### Quantitative (정량적 목표)
+- **Retention:** D+30 리텐션 40% 이상 유지
+- **Completion:** 매칭된 그룹의 프로젝트 완료율 70% 달성
+- **Growth:** 6개월 내 MAU 10,000명 달성
+
+### Qualitative (정성적 목표)
+- "TailCamp 덕분에 인생 팀원을 만났다"는 사용자 후기 확보
+- 채용 담당자들 사이에서 "TailCamp 출신은 협업을 할 줄 안다"는 인식 형성
+
+---
+
+## 관련 문서
 
 - [Executive Summary](01-executive-summary.md) - 프로젝트 개요
 - [Features Overview](03-features/README.md) - 기능 명세

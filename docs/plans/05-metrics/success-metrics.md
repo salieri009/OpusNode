@@ -1,141 +1,90 @@
-# 📊 Success Metrics & KPIs
+# Success Metrics & KPIs
 
 **Document:** TailCamp PRD - Success Metrics & KPIs  
-**Version:** 1.0  
-**Last Updated:** 2025-11-15
+**Version:** 1.1  
+**Last Updated:** 2025-11-23
 
 ---
 
-## 📋 Overview
+## 1. Overview
 
-TailCamp의 성공을 측정하기 위한 핵심 지표(KPIs)와 메트릭을 정의합니다.
+This document defines the Key Performance Indicators (KPIs) and success metrics for the TailCamp platform. These metrics are designed to measure the health of the ecosystem, user value realization, and business growth. They are categorized to align with the user lifecycle: Acquisition, Activation, Retention, Referral, and Revenue (AARRR).
 
-**관련 문서:**
-- [Executive Summary](../01-executive-summary.md) - 프로젝트 개요
-- [Development Roadmap](../06-roadmap/development-roadmap.md) - 개발 계획
-
----
-
-## 🎯 North Star Metric
-
-### 활성 학습 그룹 수 (Active Learning Groups)
-
-**정의:** 주간 3회 이상 활동하는 그룹 수
-
-**목표:**
-- 6개월 내: 2,000개 그룹
-- 12개월 내: 5,000개 그룹
-
-**측정 방법:**
-- 그룹 내 활동 로그 분석
-- 주간 최소 3회 이상의 상호작용 (채팅, 파일 업로드, 태스크 업데이트 등)
+**Related Documents:**
+- [Executive Summary](../01-executive-summary.md)
+- [Development Roadmap](../06-roadmap/development-roadmap.md)
 
 ---
 
-## 📈 Key Metrics
+## 2. North Star Metric
 
-### Engagement Metrics
+### Active Learning Groups (ALG)
+**Definition:** The number of groups that have generated at least 3 meaningful interactions (chat, code commit, task update) within a rolling 7-day period.
 
-**DAU (Daily Active Users)**
-- 목표: 6개월 내 3,000명
-- 측정: 일일 로그인 및 활동 사용자 수
+**Rationale:** This metric captures the core value of TailCamp—collaborative learning. It correlates directly with user retention, project completion, and platform health.
 
-**WAU (Weekly Active Users)**
-- 목표: 6개월 내 10,000명
-- 측정: 주간 로그인 및 활동 사용자 수
-
-**세션 길이**
-- 목표: 평균 30분 이상
-- 측정: 사용자 세션 평균 지속 시간
-
-**재방문율**
-- 목표: 7일 내 60% 이상
-- 측정: 첫 방문 후 7일 내 재방문 비율
+**Targets:**
+-   **Q2 (Launch + 3mo):** 500 ALGs
+-   **Q4 (Launch + 9mo):** 2,000 ALGs
 
 ---
 
-### Learning Metrics
+## 3. Core KPIs by Category
 
-**인터뷰 완료율**
-- 목표: 80% 이상
-- 측정: 인터뷰 시작 대비 완료 비율
+### 3.1 Activation (First Value)
+*Measuring the effectiveness of the onboarding and matching process.*
 
-**매칭 성공률**
-- 목표: 85% 이상 (48시간 내)
-- 측정: 대기열 참가 대비 매칭 성공 비율
+| Metric | Definition | Target (Q2) |
+|:-------|:-----------|:------------|
+| **Assessment Completion Rate** | % of sign-ups who complete the initial AI assessment. | > 80% |
+| **Time-to-Match** | Average time from joining the queue to being placed in a group. | < 24 Hours |
+| **First Project Start Rate** | % of new groups that initialize their first project within 48 hours. | > 90% |
 
-**그룹 프로젝트 완료율**
-- 목표: 70% 이상
-- 측정: 시작된 프로젝트 대비 완료 비율
+### 3.2 Retention (Habit Formation)
+*Measuring long-term engagement and platform stickiness.*
 
-**커리큘럼 진행률**
-- 목표: 주차별 60% 이상
-- 측정: 각 주차별 완료된 태스크 비율
+| Metric | Definition | Target (Q2) |
+|:-------|:-----------|:------------|
+| **Day 30 Retention** | % of users active on Day 30 after sign-up. | > 40% |
+| **Weekly Active Users (WAU)** | Unique users who perform a core action (learn, code, chat) in a week. | 5,000 |
+| **Group Survival Rate** | % of groups that remain active until project completion. | > 70% |
 
----
+### 3.3 Outcomes (Value Realization)
+*Measuring the tangible benefits delivered to users.*
 
-### Quality Metrics
-
-**사용자 만족도 (NPS)**
-- 목표: 50+ 달성
-- 측정: Net Promoter Score 설문
-
-**AI 평가 정확도**
-- 목표: 80% 이상 (사용자 피드백 기반)
-- 측정: 사용자가 평가한 정확도와 시스템 평가 비교
-
-**매칭 만족도**
-- 목표: 4.0/5.0 이상
-- 측정: 매칭 후 사용자 만족도 설문
-
-**포트폴리오 생성률**
-- 목표: 완료 프로젝트의 50% 이상
-- 측정: 완료된 프로젝트 대비 포트폴리오 생성 비율
+| Metric | Definition | Target (Q2) |
+|:-------|:-----------|:------------|
+| **Project Completion Rate** | % of started projects that result in a generated portfolio. | > 60% |
+| **Portfolio Generation Rate** | % of project completers who export a portfolio. | > 50% |
+| **Net Promoter Score (NPS)** | User willingness to recommend TailCamp. | > 50 |
 
 ---
 
-### Business Metrics
+## 4. Operational Health Metrics
 
-**사용자 증가율**
-- 목표: 월 20% 이상
-- 측정: 월간 신규 사용자 증가율
+These metrics monitor the technical stability and operational efficiency required to support growth.
 
-**유지율 (Retention)**
-- 목표: 30일 60% 이상
-- 측정: 첫 방문 후 30일 내 재방문 비율
-
-**그룹 해체율**
-- 목표: 20% 이하
-- 측정: 생성된 그룹 대비 해체 비율
+-   **System Uptime:** 99.9% availability.
+-   **Match Failure Rate:** < 5% of users failing to find a match within 48 hours.
+-   **AI Response Latency:** < 2 seconds for chat interactions; < 30 seconds for curriculum generation.
+-   **Support Ticket Volume:** < 1 ticket per 100 active users per week.
 
 ---
 
-## 📊 Measurement Dashboard
+## 5. Measurement Strategy
 
-### 실시간 모니터링
-- DAU/WAU 실시간 카운터
-- 그룹 활동 히트맵
-- 프로젝트 완료율 차트
+### Data Sources
+-   **Application DB (PostgreSQL):** Transactional data (sign-ups, project status).
+-   **Event Logs (Mixpanel/Amplitude):** User behavior tracking (clicks, flows).
+-   **System Logs (DataDog/Sentry):** Performance and error tracking.
+-   **User Surveys:** Qualitative feedback (NPS, CSAT).
 
-### 주간 리포트
-- 사용자 증가 추이
-- 그룹 활동 통계
-- AI 평가 정확도 추이
-
-### 월간 리포트
-- 종합 성과 리포트
-- 목표 달성률
-- 개선 영역 분석
+### Reporting Cadence
+-   **Real-time Dashboard:** Operational health, live user count.
+-   **Weekly Business Review (WBR):** WAU, Retention, Match Quality.
+-   **Monthly Business Review (MBR):** Strategic goal progress, Roadmap adjustments.
 
 ---
 
-## 🔗 관련 문서
-
-- [Executive Summary](../01-executive-summary.md) - 프로젝트 개요
-- [Development Roadmap](../06-roadmap/development-roadmap.md) - 개발 계획
-- [Risk Assessment](../07-risks/risk-assessment.md) - 리스크 평가
-
----
-
-**다음 단계:** [Development Roadmap](../06-roadmap/development-roadmap.md) 확인
+**Next Step:** Review [Development Roadmap](../06-roadmap/development-roadmap.md).
 
