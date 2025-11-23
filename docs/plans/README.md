@@ -1,4 +1,4 @@
-# 📋 TailCamp — Product Requirements Document (PRD)
+# TailCamp — Product Requirements Document (PRD)
 
 # TailCamp — Product Requirements Document (PRD)
 
@@ -90,29 +90,6 @@
 - **Engineer**: Architecture → API Endpoints → Database Schema
 - **Designer**: UX/UI Design Principles → Features (각 기능별 UX 요구사항)
 - **QA**: Features (Acceptance Criteria) → Risk Assessment
-
----
-
-## Document Status
-
-| Section | Status | Last Updated |
-|---------|--------|--------------|
-| Executive Summary | Complete | 2025-11-15 |
-| Product Overview | Complete | 2025-11-15 |
-| Features | Complete | 2025-11-15 |
-| Architecture | Complete | 2025-11-15 |
-| Metrics | Complete | 2025-11-15 |
-| Roadmap | Complete | 2025-11-15 |
-| Risks | Complete | 2025-11-15 |
-| Design | Complete | 2025-11-15 |
-| Security | Complete | 2025-11-15 |
-| Appendix | Complete | 2025-11-15 |
-
----
-
-## Sign-off
-
-**Product Manager:** _________________  
 **Engineering Lead:** _________________  
 **Design Lead:** _________________  
 **Date:** _________________

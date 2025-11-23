@@ -1,5 +1,3 @@
-# 🎯 Product Overview
-
 # Product Overview
 
 ## Version History
