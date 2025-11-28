@@ -20,12 +20,15 @@ This document describes how the UX/UI design documents (`01-UX-UI-Principles.md`
 - [01-UX-UI-Principles](01-UX-UI-Principles.md) - Design philosophy and system
 - [02-User-Journey-Flows](02-User-Journey-Flows.md) - Detailed UX flows
 - [Features Overview](../03-features/README.md) - All feature specifications
-- [F-001: AI Assessment](../03-features/F-001-AI-Assessment.md)
-- [F-002: Group Matching](../03-features/F-002-Group-Matching.md)
-- [F-003: Learning Dashboard](../03-features/F-003-Learning-Dashboard.md)
-- [F-004: Project Workspace](../03-features/F-004-Project-Workspace.md)
-- [F-005: Curriculum Generator](../03-features/F-005-Curriculum-Generator.md)
-- [F-006: Portfolio Generator](../03-features/F-006-Portfolio-Generator.md)
+
+**Related Features:**
+This document explicitly maps design decisions to the following features:
+- **[F-001: AI Assessment](../03-features/F-001-AI-Assessment.md)** - Section 2.1: Assessment Flow Design
+- **[F-002: Group Matching](../03-features/F-002-Group-Matching.md)** - Section 2.2: Matching Flow Design
+- **[F-003: Learning Dashboard](../03-features/F-003-Learning-Dashboard.md)** - Section 2.3: Dashboard Design
+- **[F-004: Project Workspace](../03-features/F-004-Project-Workspace.md)** - Section 2.4: Workspace Design
+- **[F-005: Curriculum Generator](../03-features/F-005-Curriculum-Generator.md)** - Section 2.5: Curriculum Visualization
+- **[F-006: Portfolio Generator](../03-features/F-006-Portfolio-Generator.md)** - Section 2.6: Portfolio Design
 
 ---
 

@@ -1,14 +1,14 @@
 # Database Schema
 
 **Document:** TailCamp PRD - Database Schema  
-**Version:** 1.2  
-**Last Updated:** 2025-11-23
+**Version:** 2.0  
+**Last Updated:** 2025-11-28  
 
 ---
 
 ## 1. Overview
 
-This document defines the database schema for the TailCamp platform, using PostgreSQL as the primary relational database. It details the core tables, relationships, and indexing strategies to ensure performance and data integrity.
+This document defines the database schema for the TailCamp (OpusNode) platform, utilizing **PostgreSQL** as the primary relational database. It details the core tables, relationships, and indexing strategies to ensure high performance, data integrity, and scalability.
 
 **Related Documents:**
 - [01-System-Architecture](01-System-Architecture.md)
@@ -26,10 +26,12 @@ CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(255) UNIQUE NOT NULL,
   name VARCHAR(100) NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  role VARCHAR(50) DEFAULT 'user', -- 'user', 'admin', 'moderator'
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  password_hash VARCHAR(255) NOT NULL, -- Bcrypt hash
+  role VARCHAR(50) DEFAULT 'user', -- ENUM: 'user', 'admin', 'moderator'
+  auth_provider VARCHAR(50) DEFAULT 'local', -- 'local', 'google', 'github'
+  provider_id VARCHAR(255), -- External ID for OAuth
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE INDEX idx_users_email ON users(email);
@@ -48,18 +50,18 @@ Stores the results of AI-driven skill assessments.
 CREATE TABLE assessments (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  scores JSONB NOT NULL, -- Detailed score breakdown
-  level VARCHAR(50) NOT NULL, -- 'beginner', 'intermediate', 'advanced'
-  collaboration_style VARCHAR(50), -- 'leader', 'builder', 'researcher'
-  learning_goals TEXT[],
-  recommended_paths TEXT[],
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  scores JSONB NOT NULL, -- Detailed score breakdown (e.g., {"backend": 0.8})
+  level VARCHAR(50) NOT NULL, -- ENUM: 'beginner', 'intermediate', 'advanced'
+  collaboration_style VARCHAR(50), -- ENUM: 'leader', 'builder', 'researcher'
+  learning_goals TEXT[], -- Array of strings
+  recommended_paths TEXT[], -- Array of strings
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE INDEX idx_assessments_user_id ON assessments(user_id);
 CREATE INDEX idx_assessments_level ON assessments(level);
-CREATE INDEX idx_assessments_scores ON assessments USING GIN(scores);
+CREATE INDEX idx_assessments_scores ON assessments USING GIN(scores); -- GIN index for JSONB querying
 ```
 
 **JSONB Schema (scores):**
@@ -74,33 +76,34 @@ CREATE INDEX idx_assessments_scores ON assessments USING GIN(scores);
 ```
 
 ### 2.3 Groups Table [F-002]
-Manages learning group entities.
+Manages learning group entities formed by the matching algorithm.
 
 ```sql
 CREATE TABLE groups (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(200),
-  status VARCHAR(50) DEFAULT 'active', -- 'active', 'inactive', 'disbanded'
+  status VARCHAR(50) DEFAULT 'active', -- ENUM: 'forming', 'active', 'completed', 'archived'
   matching_score JSONB, -- Metadata about why this group was formed
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  project_repo_url VARCHAR(255), -- Link to GitHub Repository
+  communication_channel_url VARCHAR(255), -- Link to Slack/Discord
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE INDEX idx_groups_status ON groups(status);
 ```
 
 ### 2.4 Group Members Table
-Links users to groups with specific roles.
+Links users to groups with specific roles, implementing a many-to-many relationship.
 
 ```sql
 CREATE TABLE group_members (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   group_id UUID REFERENCES groups(id) ON DELETE CASCADE,
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  role VARCHAR(50), -- 'leader', 'member'
-  joined_at TIMESTAMP DEFAULT NOW(),
-  left_at TIMESTAMP,
-  UNIQUE(group_id, user_id)
+  role VARCHAR(50) DEFAULT 'member', -- ENUM: 'leader', 'member'
+  joined_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(group_id, user_id) -- Prevent duplicate membership
 );
 
 CREATE INDEX idx_group_members_group_id ON group_members(group_id);
@@ -108,129 +111,34 @@ CREATE INDEX idx_group_members_user_id ON group_members(user_id);
 ```
 
 ### 2.5 Projects Table [F-004]
-Tracks project progress and metadata.
+Stores information about the projects undertaken by groups.
 
 ```sql
 CREATE TABLE projects (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   group_id UUID REFERENCES groups(id) ON DELETE CASCADE,
-  name VARCHAR(200) NOT NULL,
+  title VARCHAR(255) NOT NULL,
   description TEXT,
-  tech_stack JSONB, -- Array of technologies used
-  status VARCHAR(50) DEFAULT 'planning', -- 'planning', 'in_progress', 'review', 'completed'
-  github_repo_url VARCHAR(500),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
+  status VARCHAR(50) DEFAULT 'planning', -- ENUM: 'planning', 'in_progress', 'review', 'completed'
+  repository_url VARCHAR(255),
+  demo_url VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 CREATE INDEX idx_projects_group_id ON projects(group_id);
-CREATE INDEX idx_projects_status ON projects(status);
-CREATE INDEX idx_projects_tech_stack ON projects USING GIN(tech_stack);
 ```
 
-### 2.6 Tasks Table
-Manages individual work items within a project.
+## 3. Design Considerations
 
-```sql
-CREATE TABLE tasks (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  project_id UUID REFERENCES projects(id) ON DELETE CASCADE,
-  title VARCHAR(200) NOT NULL,
-  description TEXT,
-  assignee_id UUID REFERENCES users(id),
-  status VARCHAR(50) DEFAULT 'todo', -- 'todo', 'in_progress', 'done'
-  priority VARCHAR(50) DEFAULT 'medium', -- 'low', 'medium', 'high'
-  due_date TIMESTAMP,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
+### 3.1 JSONB Usage
+-   **Flexibility:** `scores` and `matching_score` use JSONB to allow for evolving schema requirements without altering table structure.
+-   **Indexing:** GIN indexes are applied to JSONB columns to ensure efficient querying of nested data.
 
-CREATE INDEX idx_tasks_project_id ON tasks(project_id);
-CREATE INDEX idx_tasks_assignee_id ON tasks(assignee_id);
-CREATE INDEX idx_tasks_status ON tasks(status);
-```
+### 3.2 Timezones
+-   All timestamps are stored in `TIMESTAMP WITH TIME ZONE` (UTC) to ensure consistency across different geographical regions.
 
-### 2.7 Curriculums Table [F-005]
-Stores personalized learning paths.
-
-```sql
-CREATE TABLE curriculums (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  roadmap JSONB NOT NULL, -- The full curriculum structure
-  current_week INTEGER DEFAULT 1,
-  progress JSONB, -- Tracking completion status
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE INDEX idx_curriculums_user_id ON curriculums(user_id);
-CREATE INDEX idx_curriculums_roadmap ON curriculums USING GIN(roadmap);
-```
-
-**JSONB Schema (roadmap):**
-```json
-{
-  "weeks": [
-    {
-      "week": 1,
-      "goals": ["Learn basics"],
-      "tasks": [...],
-      "resources": [...]
-    }
-  ]
-}
-```
-
-### 2.8 Portfolios Table [F-006]
-Stores generated portfolio data.
-
-```sql
-CREATE TABLE portfolios (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
-  project_ids UUID[], -- Array of projects included
-  template VARCHAR(50),
-  content JSONB, -- The generated content
-  public_url VARCHAR(500),
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
-
-CREATE INDEX idx_portfolios_user_id ON portfolios(user_id);
-```
-
----
-
-## 3. Entity Relationships
-
-### ER Diagram Summary
-
--   **Users** have 1:N relationships with **Assessments**, **Group Members**, and **Portfolios**.
--   **Users** have a 1:1 relationship with **Curriculums**.
--   **Groups** have 1:N relationships with **Group Members** and **Projects**.
--   **Projects** have a 1:N relationship with **Tasks**.
-
----
-
-## 4. Indexing Strategy
-
-To ensure high performance, the following indexing strategies are applied:
-
--   **Primary Keys:** Automatically indexed (B-Tree).
--   **Foreign Keys:** Explicitly indexed to speed up joins.
--   **JSONB Fields:** GIN indexes used for `scores`, `tech_stack`, and `roadmap` to allow efficient querying within JSON documents.
--   **Status Fields:** Indexed to quickly filter active groups or projects.
-
----
-
-## 5. Security Considerations
-
--   **Password Hashing:** Passwords are never stored in plain text; `bcrypt` or `Argon2` is used.
--   **Encryption:** Sensitive user data is encrypted at rest.
--   **RLS (Row Level Security):** Can be enabled for multi-tenant isolation if needed.
-
----
-
-**Next Step:** Review [04-API-Endpoints](04-API-Endpoints.md).
+### 3.3 Data Integrity
+-   **Foreign Keys:** Strict foreign key constraints with `ON DELETE CASCADE` ensure referential integrity (e.g., deleting a user removes their assessment data).
+-   **Unique Constraints:** Applied where necessary (e.g., `email`, `group_id + user_id`) to prevent data duplication.
 

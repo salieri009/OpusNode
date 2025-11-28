@@ -14,6 +14,14 @@ This document provides comprehensive user journey maps and detailed UX flows for
 - [01-UX-UI-Principles](01-UX-UI-Principles.md) - Design philosophy and system
 - [Features Overview](../03-features/README.md) - Feature specifications
 
+**Related Features:**
+- **[F-001: AI Assessment](../03-features/F-001-AI-Assessment.md)** - Flow 1: Onboarding → Assessment (Sections 3.1.1-3.1.8)
+- **[F-002: Group Matching](../03-features/F-002-Group-Matching.md)** - Flow 2: Matching & Group Formation (Sections 3.2.1-3.2.3)
+- **[F-003: Learning Dashboard](../03-features/F-003-Learning-Dashboard.md)** - Solo Dashboard path (Section 3.1.8 alternative)
+- **[F-004: Project Workspace](../03-features/F-004-Project-Workspace.md)** - Flow 3: Project & Portfolio (Sections 3.3.1-3.3.3)
+- **[F-005: Curriculum Generator](../03-features/F-005-Curriculum-Generator.md)** - Solo Dashboard curriculum visualization
+- **[F-006: Portfolio Generator](../03-features/F-006-Portfolio-Generator.md)** - Flow 3: Portfolio Generation (Section 3.3.4)
+
 ---
 
 ## 2. User Journey Map

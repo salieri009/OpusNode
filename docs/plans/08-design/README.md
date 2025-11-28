@@ -5,6 +5,19 @@
 
 ---
 
+## Page Design Specifications
+
+Detailed page-by-page design specifications are available in the [Page Design](page-design/) directory, covering all 20 screens:
+
+- **Onboarding & Assessment (8 pages):** Landing, Sign Up, Email Verification, Interest Selection, Goal Input, Assessment Intro, AI Interview, Results
+- **Matching & Group (3 pages):** Matching Queue, Match Found, Group Profile
+- **Project & Portfolio (4 pages):** Project Proposal, Voting, Workspace, Portfolio Generator
+- **Essential Pages (5 pages):** Login, User Profile/Settings, Solo Dashboard, Error Page, Terms & Privacy
+
+**See:** [Page Design Directory](page-design/README.md) for complete list and complexity classification.
+
+---
+
 ## Overview
 
 This directory contains user experience design principles, detailed user flows, design system specifications, and accessibility guidelines for TailCamp.
@@ -16,6 +29,7 @@ This directory contains user experience design principles, detailed user flows, 
 | **[01-UX-UI-Principles](01-UX-UI-Principles.md)** | Design philosophy, basic user flows with mermaid diagrams, design system, and accessibility standards. | Designers, Frontend Engineers |
 | **[02-User-Journey-Flows](02-User-Journey-Flows.md)** | Comprehensive user journey maps and detailed screen-by-screen UX flows with interaction states, error handling, and edge cases. | Designers, Frontend Engineers, QA |
 | **[03-Design-Features-Integration](03-Design-Features-Integration.md)** | Detailed mapping of how design documents connect to feature specifications, with rationale for design decisions. | All Stakeholders, PM, Designers, Engineers |
+| **[Page Design](page-design/README.md)** | Detailed page-by-page design specifications for all 20 screens in the platform. | Designers, Frontend Engineers, QA |
 
 ## Design Philosophy
 
@@ -60,3 +74,4 @@ Dashboard → Propose Project → Vote → Workspace (Kanban board) → Complete
 - **[View UX/UI Principles →](01-UX-UI-Principles.md)**
 - **[View User Journey Flows →](02-User-Journey-Flows.md)**
 - **[View Design-Features Integration →](03-Design-Features-Integration.md)**
+- **[View Page Design Specifications →](page-design/README.md)**

@@ -2,7 +2,16 @@
 
 **Document:** TailCamp PRD - UX/UI Design Principles  
 **Version:** 1.1  
-**Last Updated:** 2025-11-23
+**Last Updated:** 2025-11-28
+
+**Related Features:**
+- **All Features:** This document provides design principles that apply across all features (F-001 through F-006)
+- [F-001: AI Assessment](../03-features/F-001-AI-Assessment.md) - Chat interface design patterns
+- [F-002: Group Matching](../03-features/F-002-Group-Matching.md) - Matching queue UI patterns
+- [F-003: Learning Dashboard](../03-features/F-003-Learning-Dashboard.md) - Dashboard visualization principles
+- [F-004: Project Workspace](../03-features/F-004-Project-Workspace.md) - Collaboration interface patterns
+- [F-005: Curriculum Generator](../03-features/F-005-Curriculum-Generator.md) - Learning path visualization
+- [F-006: Portfolio Generator](../03-features/F-006-Portfolio-Generator.md) - Template design system
 
 ---
 
