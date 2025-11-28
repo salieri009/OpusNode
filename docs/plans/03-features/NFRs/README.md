@@ -1,7 +1,7 @@
 # Non-Functional Requirements (NFRs)
 
 **Directory:** TailCamp PRD - Non-Functional Requirements  
-**Last Updated:** 2025-11-23
+**Last Updated:** 2025-11-28
 
 ---
 
@@ -14,6 +14,7 @@ This directory contains consolidated Non-Functional Requirements (NFRs) extracte
 | Document | Description | Audience |
 |:---------|:------------|:---------|
 | **[01-Non-Functional-Requirements](01-Non-Functional-Requirements.md)** | Comprehensive NFRs covering performance, reliability, security, usability, quality, privacy, and compliance. | All Engineers, Architects, QA, PM |
+| **[02-NFRs-Design-Integration](02-NFRs-Design-Integration.md)** | Detailed mapping of how NFRs connect to UX/UI design decisions, with rationale for design choices based on NFR requirements. | Designers, Engineers, QA, PM |
 
 ## NFR Categories
 
@@ -87,4 +88,5 @@ This directory contains consolidated Non-Functional Requirements (NFRs) extracte
 **Quick Links:**
 - **[← Back to Features](../README.md)**
 - **[View NFRs →](01-Non-Functional-Requirements.md)**
+- **[View NFRs-Design Integration →](02-NFRs-Design-Integration.md)**
 

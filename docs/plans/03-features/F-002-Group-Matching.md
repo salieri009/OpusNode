@@ -1,69 +1,78 @@
-# F-002: Group Matching Algorithm
+# F-002: Intelligent Group Matching
 
 ---
-**Date:** 2025-11-23  
-**Audience:** Product Manager, Backend Engineer, Data Scientist  
+**Document ID:** F-002  
+**Version:** 2.0  
+**Date:** 2025-11-28  
+**Author:** Senior Technical Writer  
+**Status:** Draft  
 ---
 
 ## 1. Overview
+The **Intelligent Group Matching** system is the core engine of OpusNode. It utilizes a weighted multi-variable algorithm to form project teams that are balanced in skills, compatible in schedule, and diverse in perspective. The system aims to maximize the "Project Success Probability" metric.
 
-The **Group Matching Algorithm** is an AI-driven engine that connects learners with similar goals, complementary skill levels, and compatible collaboration styles to form effective project teams. It minimizes friction and maximizes project completion rates.
+## 2. Purpose
+The purpose of this feature is to:
+1.  **Optimize Team Composition:** Prevent common failure modes like "all-beginner teams" or "conflicting schedules."
+2.  **Automate Administration:** Replace manual spreadsheet-based grouping with an instant, data-driven process.
+3.  **Enhance Learning Outcomes:** Pair students in ways that foster peer learning (e.g., Mentor-Mentee dynamics).
 
-**Direct Quote:**
-> "유사한 목표와 수준의 학습자를 매칭하는 AI 기반 알고리즘입니다." ([Features Overview](README.md))
+## 3. Terminology
+| Term | Definition |
+| :--- | :--- |
+| **Matching Score ($S$)** | A calculated numerical value representing the compatibility between a user and a potential group. |
+| **Hard Constraint** | A rule that must be met (e.g., "Must speak English"). Violation results in a score of 0. |
+| **Soft Constraint** | A preference that increases the score but is not mandatory (e.g., "Prefers Frontend"). |
+| **Genetic Algorithm** | An optimization heuristic that mimics the process of natural selection to find high-quality solutions for optimization problems. |
 
-## 2. User Stories
+## 4. Feature Summary
+The matching engine processes user profiles through a three-stage pipeline: **Filtering (Hard Constraints)** -> **Scoring (Soft Constraints)** -> **Optimization (Team Formation)**.
 
-- **US-2.1:** As a **learner**, I want to be matched with peers who have similar learning goals so that we stay motivated.
-- **US-2.2:** As a **user**, I want to find teammates who are available during the same hours to ensure smooth collaboration.
-- **US-2.3:** As a **system**, I need to balance team composition (e.g., Leader, Builder, Researcher) to prevent role conflict.
+## 5. Detailed Description
 
-## 3. Functional Requirements (FR)
+### 5.1 Matching Algorithm Logic
+The compatibility score ($S$) between a set of users is calculated as follows:
 
-### FR-1: Matching Criteria
-- **FR-1.1:** The system shall calculate a **Goal Similarity Score** using Cosine Similarity (threshold ≥ 0.7).
-- **FR-1.2:** The system shall ensure team members are within **±1 skill level** of each other.
-- **FR-1.3:** The system shall prioritize matching users with overlapping availability windows.
+$$ S = (w_1 \times C_{skill}) + (w_2 \times C_{schedule}) + (w_3 \times C_{style}) - P_{conflict} $$
 
-### FR-2: Group Composition
-- **FR-2.1:** The system shall form groups with a minimum of **3 members** and a maximum of **6 members**.
-- **FR-2.2:** The system shall attempt to mix different collaboration styles (Leader, Builder, Researcher) based on assessment data.
+#### Variables & Weights
+1.  **Skill Complementarity ($C_{skill}$, 40%)**
+    *   Ensures a mix of roles (e.g., 1 Backend, 1 Frontend, 1 Designer).
+    *   Calculates the variance of skill levels; lower variance is better for peer groups, high variance is better for mentorship groups.
+2.  **Schedule Compatibility ($C_{schedule}$, 30%)**
+    *   Calculates the number of overlapping available hours per week.
+    *   **Threshold:** Minimum 4 hours of overlap required.
+3.  **Work Style & Personality ($C_{style}$, 20%)**
+    *   Based on Big 5 or MBTI-like inputs.
+    *   Balances "Leader" and "Follower" traits.
+4.  **Diversity Bonus (10%)**
+    *   Adds points for mixed majors or backgrounds.
 
-### FR-3: Queue Management
-- **FR-3.1:** The system shall process the matching queue every **1 hour**.
-- **FR-3.2:** The system shall notify users if a match is not found within **48 hours** and offer a solo project option.
+#### Penalties
+*   **$P_{conflict}$:** If users have blocked each other or have a history of negative peer reviews, the score is penalized heavily (-$\infty$).
 
-## 4. Non-Functional Requirements (NFR)
+### 5.2 Execution Flow
+1.  **Data Collection:** Users complete the onboarding survey (Skills, Schedule, Style).
+2.  **Batch Processing:** The system runs the matching job (via BullMQ) at a scheduled time (e.g., after registration deadline).
+3.  **Draft Generation:** The Genetic Algorithm generates 3 candidate team configurations.
+4.  **Instructor Review:** The instructor reviews the drafts and selects the best configuration.
+5.  **Notification:** Users are notified of their team assignment.
 
-### NFR-1: Performance
-- **NFR-1.1:** The matching algorithm shall process a batch of 1,000 users within **5 seconds**.
-- **NFR-1.2:** Match notifications shall be delivered via WebSocket within **500ms** of group formation.
+## 6. Use Cases
 
-### NFR-2: Accuracy
-- **NFR-2.1:** The algorithm shall achieve a **Project Completion Rate** of at least 70% for matched groups.
+### UC-01: Balanced Team Formation
+*   **Scenario:** A class has 100 students with varying skill levels (20 Experts, 50 Intermediates, 30 Beginners).
+*   **System Action:** The algorithm distributes Experts evenly across teams to ensure no team is left without technical leadership.
 
-### NFR-3: Privacy
-- **NFR-3.1:** User profiles shared during matching shall only reveal necessary technical details, hiding sensitive personal information until the group is confirmed.
+### UC-02: Schedule-Based Matching
+*   **Scenario:** Student A works part-time and is only available on weekends. Student B is free only on weekdays.
+*   **System Action:** The system detects zero overlap and prevents them from being matched, avoiding future scheduling conflicts.
 
-## 5. Interface Specifications
+## 7. Limitations & Constraints
+*   **Cold Start Problem:** The algorithm requires accurate user input. If students lie about their skills, the matching will be suboptimal.
+*   **Computational Complexity:** The problem is NP-Hard. For $N > 500$, exact solutions are impossible; heuristic approximations are used.
+*   **Human Factor:** Algorithms cannot predict interpersonal chemistry perfectly. A manual "Team Change Request" process is required as a fallback.
 
-### API Endpoints
-- `POST /api/matching/join-queue`: Adds the user to the matching pool.
-- `GET /api/matching/status`: Checks current queue status.
-- `POST /api/matching/leave-queue`: Removes the user from the pool.
-
-*Refer to [API Endpoints](../04-architecture/api-endpoints.md) for detailed schemas.*
-
-## 6. Acceptance Criteria
-
-- [ ] Algorithm successfully groups 4 users with identical goals and compatible levels.
-- [ ] System prevents grouping of users with zero availability overlap.
-- [ ] Users receive a push notification immediately upon successful matching.
-- [ ] Unmatched users receive a "Solo Mode" suggestion after the timeout period.
-
-## 7. Related Documents
-
-- [F-001: AI Interview & Assessment System](F-001-AI-Assessment.md)
-- [F-004: Project Workspace](F-004-Project-Workspace.md)
-- [System Architecture](../04-architecture/system-architecture.md)
+## 8. Conclusion
+F-002 transforms team formation from a random guess into a scientific process. By explicitly defining weights for Skills, Schedule, and Style, OpusNode ensures that every team has a fighting chance at success.
 

@@ -1,71 +1,75 @@
-# F-004: Project Workspace
+# F-004: Project Workspace (Integration Hub)
 
 ---
-**Date:** 2025-11-23  
-**Audience:** Product Manager, Full Stack Engineer, DevOps Engineer  
+**Document ID:** F-004  
+**Version:** 2.0  
+**Date:** 2025-11-28  
+**Author:** Senior Technical Writer  
+**Status:** Draft  
 ---
 
 ## 1. Overview
+The **Project Workspace** serves as the central digital hub for student teams. In its initial release (MVP), it functions primarily as an **Integration Hub**, orchestrating the automatic provisioning and management of external collaboration tools (Slack, GitHub, Notion) rather than providing native alternatives. This approach minimizes the learning curve and leverages industry-standard tools.
 
-The **Project Workspace** is a collaborative environment where matched teams plan, execute, and deploy their projects. It integrates task management, version control (GitHub), and AI-driven coaching to facilitate a professional development workflow.
+## 2. Purpose
+The purpose of this feature is to:
+1.  **Reduce Setup Time:** Eliminate the manual friction of creating repositories, communication channels, and document spaces for new teams.
+2.  **Centralize Activity:** Provide a single dashboard that aggregates activity logs from disparate external tools.
+3.  **Standardize Workflow:** Ensure all teams use a consistent set of tools and templates for their projects.
 
-**Direct Quote:**
-> "그룹 프로젝트 협업을 위한 워크스페이스입니다." ([Features Overview](README.md))
+## 3. Terminology
+| Term | Definition |
+| :--- | :--- |
+| **Integration Hub** | The core system component that connects OpusNode with external APIs (Slack, GitHub, etc.). |
+| **Provisioning** | The automated process of creating accounts, channels, or repositories and assigning permissions. |
+| **Activity Feed** | A chronological stream of events (commits, messages, edits) collected from connected tools. |
+| **LTI (Learning Tools Interoperability)** | A standard protocol for connecting learning systems, used here for potential LMS integration. |
 
-## 2. User Stories
+## 4. Feature Summary
+The Project Workspace focuses on **Tool Provisioning** and **Activity Aggregation**.
+*   **Auto-Provisioning:** Automatically creates a Slack channel, GitHub repository, and Notion page upon team formation.
+*   **Unified Dashboard:** Displays a high-level view of team progress, including recent commits, active tasks, and unread messages.
+*   **Milestone Tracking:** Simple checklist-based tracking of project phases, synced with external issue trackers where possible.
 
-- **US-4.1:** As a **team member**, I want to assign tasks to myself or others so that we know who is doing what.
-- **US-4.2:** As a **developer**, I want to see my GitHub PR status directly in the workspace to track code reviews.
-- **US-4.3:** As a **team**, we want an AI Coach to suggest technical stacks and review our architecture.
+## 5. Detailed Description
 
-## 3. Functional Requirements (FR)
+### 5.1 Tool Provisioning Workflow
+When a group is finalized (Status: `MATCHED`), the system triggers the following sequence:
 
-### FR-1: Task Management
-- **FR-1.1:** The system shall provide a Kanban-style board for managing tasks (To Do, In Progress, Done).
-- **FR-1.2:** Users shall be able to assign tasks, set due dates, and add labels.
+1.  **GitHub Repository Creation:**
+    *   Creates a private repository in the organization's GitHub account.
+    *   Adds all team members as collaborators.
+    *   Initializes with a standard `README.md` and `.gitignore` template.
+2.  **Communication Channel Setup:**
+    *   Creates a private channel in the course's Slack workspace or a dedicated Discord server.
+    *   Invites all team members and the assigned mentor.
+3.  **Documentation Space:**
+    *   Generates a new Team Space in Notion or a Shared Folder in Google Drive.
+    *   Populates it with project templates (PRD, Weekly Report).
 
-### FR-2: GitHub Integration
-- **FR-2.1:** The system shall authenticate users via GitHub OAuth.
-- **FR-2.2:** The system shall automatically create a repository for the new group.
-- **FR-2.3:** The workspace shall display real-time commit history and open Pull Requests.
+### 5.2 Activity Aggregation Logic
+The system uses Webhooks and Polling to gather data:
+*   **GitHub:** Listens for `push`, `pull_request`, and `issue` events via Webhooks.
+*   **Slack/Discord:** Fetches message counts and activity trends (privacy-preserving: no content storage).
+*   **Notion/Drive:** Tracks "Last Edited" timestamps to monitor documentation progress.
 
-### FR-3: AI Coach
-- **FR-3.1:** The AI Coach shall analyze PRs and provide automated code review feedback.
-- **FR-3.2:** The AI Coach shall answer technical questions related to the project's tech stack.
+## 6. Use Cases
 
-### FR-4: Real-time Collaboration
-- **FR-4.1:** The workspace shall support real-time chat for group members.
-- **FR-4.2:** Task board updates shall be synchronized instantly across all connected clients.
+### UC-01: Team Onboarding
+*   **Actor:** Student (Team Leader)
+*   **Scenario:** A student logs in after being matched. They see a "Start Project" button.
+*   **Outcome:** Clicking the button instantly opens links to the pre-configured GitHub repo, Slack channel, and Notion page. No manual setup is required.
 
-## 4. Non-Functional Requirements (NFR)
+### UC-02: Progress Monitoring
+*   **Actor:** Instructor
+*   **Scenario:** An instructor wants to check if Team A is active.
+*   **Outcome:** The instructor views the Team A Dashboard and sees "5 Commits today" and "Active discussion in Slack," confirming engagement without needing to log into each tool separately.
 
-### NFR-1: Reliability
-- **NFR-1.1:** The GitHub integration module shall handle API rate limits gracefully with exponential backoff.
-- **NFR-1.2:** Chat messages must be delivered with < 500ms latency.
+## 7. Limitations & Constraints
+*   **Dependency Risk:** The system relies entirely on third-party APIs. Downtime in GitHub or Slack will affect provisioning.
+*   **Authentication:** Users must link their personal accounts (OAuth) for full functionality.
+*   **Data Privacy:** The system stores metadata (timestamps, counts) but does not archive full chat logs or code content to minimize privacy risks.
 
-### NFR-2: Security
-- **NFR-2.1:** All file uploads must be scanned for malware before storage.
-- **NFR-2.2:** Access to the workspace must be strictly limited to group members and admins.
-
-## 5. Interface Specifications
-
-### API Endpoints
-- `POST /api/projects`: Creates a new project workspace.
-- `POST /api/projects/:id/tasks`: Adds a new task.
-- `GET /api/projects/:id/github/prs`: Fetches open PRs from GitHub.
-
-*Refer to [API Endpoints](../04-architecture/api-endpoints.md) for detailed schemas.*
-
-## 6. Acceptance Criteria
-
-- [ ] A new GitHub repository is successfully created upon project initialization.
-- [ ] Task drag-and-drop updates the status for all users in real-time.
-- [ ] AI Coach correctly identifies a potential bug in a sample code snippet.
-- [ ] Users can upload and download project-related files (e.g., architecture diagrams).
-
-## 7. Related Documents
-
-- [F-002: Group Matching Algorithm](F-002-Group-Matching.md)
-- [F-006: Portfolio Generator](F-006-Portfolio-Generator.md)
-- [System Architecture](../04-architecture/system-architecture.md)
+## 8. Conclusion
+By pivoting F-004 to an **Integration Hub**, OpusNode delivers immediate value with lower development risk. This strategy allows the platform to focus on its core differentiator—**Matching and Assessment**—while relying on best-in-class tools for the actual collaboration experience. Native collaboration features will be reconsidered in Phase 3.
 

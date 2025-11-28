@@ -1099,7 +1099,8 @@ journey
 
 - [01-UX-UI-Principles](01-UX-UI-Principles.md) - Design system and philosophy
 - [Features Overview](../03-features/README.md) - Feature specifications
-- [System Architecture](../04-architecture/system-architecture.md) - Technical implementation
+- [System Architecture](../04-architecture/01-System-Architecture.md) - Technical implementation
+- [NFRs-Design Integration](../03-features/NFRs/02-NFRs-Design-Integration.md) - How UX flows meet NFR requirements
 
 ---
 

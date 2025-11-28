@@ -2,7 +2,7 @@
 
 **Document:** TailCamp PRD - Non-Functional Requirements  
 **Version:** 1.0  
-**Last Updated:** 2025-11-23
+**Last Updated:** 2025-11-28
 
 ---
 
@@ -403,8 +403,9 @@ This document consolidates the common Non-Functional Requirements (NFRs) extract
 - [01-System-Architecture](../04-architecture/01-System-Architecture.md) - System design
 - [01-Security-Privacy](../09-security/01-Security-Privacy.md) - Security details
 - [05-CI-CD-Pipeline](../04-architecture/05-CI-CD-Pipeline.md) - Deployment process
+- [02-NFRs-Design-Integration](02-NFRs-Design-Integration.md) - How NFRs connect to design decisions
 
 ---
 
-**Next Step:** Review individual feature documents (F-001 through F-007) for feature-specific NFRs.
+**Next Step:** Review [02-NFRs-Design-Integration](02-NFRs-Design-Integration.md) to understand how these NFRs are implemented in the design system.
 

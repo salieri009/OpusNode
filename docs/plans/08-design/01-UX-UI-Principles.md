@@ -200,5 +200,11 @@ graph LR
 
 ---
 
+**Related Documents:**
+- [02-User-Journey-Flows](02-User-Journey-Flows.md) - Detailed screen-by-screen flows
+- [NFRs-Design Integration](../03-features/NFRs/02-NFRs-Design-Integration.md) - How design decisions meet NFR requirements
+
+---
+
 **Next Step:** Review [02-User-Journey-Flows](02-User-Journey-Flows.md) for detailed screen-by-screen flows.
 
