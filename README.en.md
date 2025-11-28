@@ -287,3 +287,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 *A modular learning platform where each user becomes a node in a collaborative network of creation.*
 
+
