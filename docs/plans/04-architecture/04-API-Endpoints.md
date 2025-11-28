@@ -16,7 +16,7 @@ This document specifies the REST API and GraphQL endpoints for the TailCamp plat
 
 ---
 
-## 2. Authentication
+## 2. Authentication & User Management
 
 ### POST /api/auth/register
 Registers a new user.
@@ -36,9 +36,44 @@ Registers a new user.
   "user": {
     "id": "uuid",
     "email": "user@example.com",
-    "name": "John Doe"
+    "name": "John Doe",
+    "email_verified": false
   },
   "token": "jwt_token"
+}
+```
+
+### POST /api/auth/verify-email
+Verifies the user's email address.
+
+**Request:**
+```json
+{
+  "token": "verification_token"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "Email verified successfully"
+}
+```
+
+### POST /api/auth/resend-verification
+Resends the email verification link.
+
+**Request:**
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+**Response:**
+```json
+{
+  "message": "Verification email sent"
 }
 ```
 
@@ -77,6 +112,60 @@ Authorization: Bearer <refresh_token>
 ```json
 {
   "token": "new_jwt_token"
+}
+```
+
+### GET /api/users/me
+Retrieves the current user's profile.
+
+**Response:**
+```json
+{
+  "id": "uuid",
+  "email": "user@example.com",
+  "name": "John Doe",
+  "interests": ["backend", "system_design"],
+  "bio": "Backend enthusiast",
+  "avatar_url": "https://..."
+}
+```
+
+### PUT /api/users/me
+Updates the current user's profile.
+
+**Request:**
+```json
+{
+  "name": "John Doe Updated",
+  "bio": "New bio",
+  "avatar_url": "https://..."
+}
+```
+
+**Response:**
+```json
+{
+  "id": "uuid",
+  "name": "John Doe Updated",
+  "bio": "New bio"
+}
+```
+
+### PUT /api/users/interests
+Updates the user's selected interests (Onboarding).
+
+**Request:**
+```json
+{
+  "interests": ["backend", "system_design", "cloud"]
+}
+```
+
+**Response:**
+```json
+{
+  "message": "Interests updated successfully",
+  "interests": ["backend", "system_design", "cloud"]
 }
 ```
 
@@ -187,18 +276,37 @@ Checks the current status of the user in the queue.
 - `failed`: Timeout or error.
 
 ### POST /api/matching/leave-queue
-Removes the user from the matching queue.
+### POST /api/projects/:id/tasks
+Adds a task to the project board.
+
+**Request:**
+```json
+{
+  "title": "Implement authentication",
+  "description": "...",
+  "assignee_id": "uuid",
+  "priority": "high"
+}
+```
+
+### POST /api/projects/:id/vote
+Casts a vote for a project proposal (P1 Feature).
+
+**Request:**
+```json
+{
+  "vote_type": "upvote" 
+}
+```
 
 **Response:**
 ```json
 {
-  "message": "Successfully left queue"
+  "project_id": "uuid",
+  "total_votes": 15,
+  "user_vote": "upvote"
 }
-```
-
----
-
-## 5. Groups & Projects [F-004]
+```5. Groups & Projects [F-004]
 
 ### GET /api/groups/:id
 Retrieves group details.
