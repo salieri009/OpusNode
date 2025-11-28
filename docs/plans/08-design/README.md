@@ -13,7 +13,8 @@ This directory contains user experience design principles, detailed user flows, 
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[UX/UI Principles & Page Flows](ux-ui-principles.md)** | Design philosophy, detailed user flows with mermaid diagrams, design system, and accessibility standards. | Designers, Frontend Engineers |
+| **[01-UX-UI-Principles](01-UX-UI-Principles.md)** | Design philosophy, basic user flows with mermaid diagrams, design system, and accessibility standards. | Designers, Frontend Engineers |
+| **[02-User-Journey-Flows](02-User-Journey-Flows.md)** | Comprehensive user journey maps and detailed screen-by-screen UX flows with interaction states, error handling, and edge cases. | Designers, Frontend Engineers, QA |
 
 ## Design Philosophy
 
@@ -55,4 +56,5 @@ Dashboard → Propose Project → Vote → Workspace (Kanban board) → Complete
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View UX/UI Principles →](ux-ui-principles.md)**
+- **[View UX/UI Principles →](01-UX-UI-Principles.md)**
+- **[View User Journey Flows →](02-User-Journey-Flows.md)**

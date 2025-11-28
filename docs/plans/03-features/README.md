@@ -108,13 +108,34 @@ System management and monitoring console.
 | F-006 | Planned | 2 | Month 5 |
 | F-007 | Planned | 3 | Month 6 |
 
-*See [Development Roadmap](../06-roadmap/development-roadmap.md) for the detailed timeline.*
+*See [Development Roadmap](../06-roadmap/01-Development-Roadmap.md) for the detailed timeline.*
+
+---
+
+---
+
+## Non-Functional Requirements (NFRs)
+
+All features share common Non-Functional Requirements (NFRs) that define platform-wide quality attributes. These are consolidated in a separate directory for easy reference.
+
+**NFRs Directory:** [NFRs/](NFRs/)
+
+**Key NFR Categories:**
+- **Performance:** Response times, throughput, concurrency
+- **Reliability:** Availability, fault tolerance, data persistence
+- **Security:** Authentication, encryption, access control
+- **Usability:** Responsive design, accessibility (WCAG 2.1 AA)
+- **Quality:** Accuracy, content filtering, code standards
+- **Privacy:** Data minimization, GDPR/CCPA compliance
+
+**Document:** [01-Non-Functional-Requirements](NFRs/01-Non-Functional-Requirements.md)
 
 ---
 
 ## Related Documents
 
 - [Executive Summary](../01-executive-summary.md)
-- [System Architecture](../04-architecture/system-architecture.md)
-- [Development Roadmap](../06-roadmap/development-roadmap.md)
+- [System Architecture](../04-architecture/01-System-Architecture.md)
+- [Development Roadmap](../06-roadmap/01-Development-Roadmap.md)
+- [Non-Functional Requirements](NFRs/01-Non-Functional-Requirements.md)
 

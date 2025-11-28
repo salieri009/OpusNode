@@ -13,8 +13,8 @@ This directory contains documentation related to measuring the success and healt
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[Success Metrics & KPIs](success-metrics.md)** | Defines the North Star Metric and core KPIs across activation, retention, and outcomes. | PM, Leadership, Analysts |
-| **[Analytics Tracking Plan](analytics-tracking-plan.md)** | Event taxonomy, user properties, funnel definitions, and implementation guide for analytics. | Engineers, Data Analysts |
+| **[01-Success-Metrics](01-Success-Metrics.md)** | Defines the North Star Metric and core KPIs across activation, retention, and outcomes. | PM, Leadership, Analysts |
+| **[02-Analytics-Tracking-Plan](02-Analytics-Tracking-Plan.md)** | Event taxonomy, user properties, funnel definitions, and implementation guide for analytics. | Engineers, Data Analysts |
 
 ## Key Concepts
 
@@ -33,5 +33,5 @@ This directory contains documentation related to measuring the success and healt
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View Success Metrics →](success-metrics.md)**
-- **[View Analytics Plan →](analytics-tracking-plan.md)**
+- **[View Success Metrics →](01-Success-Metrics.md)**
+- **[View Analytics Plan →](02-Analytics-Tracking-Plan.md)**

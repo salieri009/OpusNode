@@ -13,8 +13,8 @@ This directory contains security requirements, privacy policies, legal complianc
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[Security & Privacy](security-privacy.md)** | Authentication, API security, data encryption, GDPR compliance, and security monitoring. | Engineers, Security Team |
-| **[Legal & Compliance](compliance-legal.md)** | GDPR/CCPA requirements, content moderation, intellectual property, Terms of Service, and accessibility laws. | Legal, PM, Leadership |
+| **[01-Security-Privacy](01-Security-Privacy.md)** | Authentication, API security, data encryption, GDPR compliance, and security monitoring. | Engineers, Security Team |
+| **[02-Compliance-Legal](02-Compliance-Legal.md)** | GDPR/CCPA requirements, content moderation, intellectual property, Terms of Service, and accessibility laws. | Legal, PM, Leadership |
 
 ## Security Overview
 
@@ -69,5 +69,5 @@ This directory contains security requirements, privacy policies, legal complianc
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View Security & Privacy →](security-privacy.md)**
-- **[View Legal Compliance →](compliance-legal.md)**
+- **[View Security & Privacy →](01-Security-Privacy.md)**
+- **[View Legal Compliance →](02-Compliance-Legal.md)**

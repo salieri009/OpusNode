@@ -200,4 +200,5 @@ graph LR
 
 ---
 
-**Next Step:** Review [Security & Privacy](../09-security/security-privacy.md).
+**Next Step:** Review [02-User-Journey-Flows](02-User-Journey-Flows.md) for detailed screen-by-screen flows.
+

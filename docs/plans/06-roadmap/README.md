@@ -13,8 +13,8 @@ This directory contains strategic planning documents outlining the phased develo
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[Development Roadmap](development-roadmap.md)** | Phased rollout strategy (MVP, Enhancement, Scale) with month-by-month feature breakdown and versioning. | All Stakeholders |
-| **[Team & Resources](team-resources.md)** | Team composition, FTE allocation, budget estimates, external dependencies, and decision criteria. | Leadership, PM, HR |
+| **[01-Development-Roadmap](01-Development-Roadmap.md)** | Phased rollout strategy (MVP, Enhancement, Scale) with month-by-month feature breakdown and versioning. | All Stakeholders |
+| **[02-Team-Resources](02-Team-Resources.md)** | Team composition, FTE allocation, budget estimates, external dependencies, and decision criteria. | Leadership, PM, HR |
 
 ## Key Phases
 
@@ -48,5 +48,5 @@ This directory contains strategic planning documents outlining the phased develo
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View Roadmap →](development-roadmap.md)**
-- **[View Team Resources →](team-resources.md)**
+- **[View Roadmap →](01-Development-Roadmap.md)**
+- **[View Team Resources →](02-Team-Resources.md)**

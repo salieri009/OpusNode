@@ -14,10 +14,11 @@ This directory contains the technical specifications and architectural designs f
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[System Architecture](system-architecture.md)** | High-level overview of system layers, data flow, and component interactions. | All Engineers, Architects |
-| **[Technology Stack](technology-stack.md)** | Detailed list of approved technologies, frameworks, and libraries. | All Engineers |
-| **[Database Schema](database-schema.md)** | ER diagrams, table definitions, and indexing strategies for PostgreSQL. | Backend Engineers, DBAs |
-| **[API Endpoints](api-endpoints.md)** | Specification of REST and GraphQL endpoints, including request/response formats. | Frontend & Backend Engineers |
+| **[01-System-Architecture](01-System-Architecture.md)** | High-level overview of system layers, data flow, and component interactions. | All Engineers, Architects |
+| **[02-Technology-Stack](02-Technology-Stack.md)** | Detailed list of approved technologies, frameworks, and libraries. | All Engineers |
+| **[03-Database-Schema](03-Database-Schema.md)** | ER diagrams, table definitions, and indexing strategies for PostgreSQL. | Backend Engineers, DBAs |
+| **[04-API-Endpoints](04-API-Endpoints.md)** | Specification of REST and GraphQL endpoints, including request/response formats. | Frontend & Backend Engineers |
+| **[05-CI-CD-Pipeline](05-CI-CD-Pipeline.md)** | CI/CD strategy, deployment workflows, and rollback procedures. | DevOps, Engineers |
 
 ## Key Architectural Decisions
 
@@ -28,4 +29,4 @@ This directory contains the technical specifications and architectural designs f
 ## Related Sections
 
 -   [Features Overview](../03-features/README.md)
--   [Security & Privacy](../09-security/security-privacy.md)
+-   [Security & Privacy](../09-security/01-Security-Privacy.md)

@@ -13,7 +13,7 @@ This directory documents identified risks across technical, product, and busines
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[Risk Assessment](risk-assessment.md)** | Comprehensive risk matrix with impact, probability, and mitigation strategies. | All Stakeholders |
+| **[01-Risk-Assessment](01-Risk-Assessment.md)** | Comprehensive risk matrix with impact, probability, and mitigation strategies. | All Stakeholders |
 
 ## Risk Categories
 
@@ -52,4 +52,4 @@ This directory documents identified risks across technical, product, and busines
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View Risk Assessment →](risk-assessment.md)**
+- **[View Risk Assessment →](01-Risk-Assessment.md)**

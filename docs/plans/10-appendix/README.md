@@ -13,8 +13,8 @@ This directory contains supplementary materials including glossary, development 
 
 | Document | Description | Audience |
 |:---------|:------------|:---------|
-| **[Appendix](appendix.md)** | Glossary of terms, internal references, external resources, and master document links. | All Stakeholders |
-| **[Development Workflow](development-workflow.md)** | Sprint cadence, PR process, code review guidelines, communication channels, and incident response. | Engineers, PM |
+| **[01-Appendix](01-Appendix.md)** | Glossary of terms, internal references, external resources, and master document links. | All Stakeholders |
+| **[02-Development-Workflow](02-Development-Workflow.md)** | Sprint cadence, PR process, code review guidelines, communication channels, and incident response. | Engineers, PM |
 
 ## Quick Reference
 
@@ -50,12 +50,12 @@ This directory contains supplementary materials including glossary, development 
 
 ## Related Sections
 
--   [CI/CD Pipeline](../04-architecture/ci-cd-pipeline.md) - Deployment workflow
--   [Legal Compliance](../09-security/compliance-legal.md) - GDPR, Terms, Privacy
+-   [CI/CD Pipeline](../04-architecture/05-CI-CD-Pipeline.md) - Deployment workflow
+-   [Legal Compliance](../09-security/02-Compliance-Legal.md) - GDPR, Terms, Privacy
 
 ---
 
 **Quick Links:**
 - **[← Back to Main PRD](../README.md)**
-- **[View Appendix →](appendix.md)**
-- **[View Development Workflow →](development-workflow.md)**
+- **[View Appendix →](01-Appendix.md)**
+- **[View Development Workflow →](02-Development-Workflow.md)**
